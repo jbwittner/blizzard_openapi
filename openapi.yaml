@@ -140,9 +140,6 @@ paths:
 #################################### Playable Race API END ############################# 
 components:
   securitySchemes:
-    openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
-      type: openIdConnect
-      openIdConnectUrl: https://oauth.battle.net/.well-known/openid-configuration
     accessToken:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
       type: http
       scheme: bearer
