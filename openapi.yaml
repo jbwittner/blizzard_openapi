@@ -297,8 +297,6 @@ components:
         - name
         - gender_name
         - power_type
-        - is_selectable
-        - is_allied_race
         - specializations
         - playable_races
 #################################### DTO END ######################################## 
