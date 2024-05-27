@@ -1,0 +1,352 @@
+openapi: 3.0.3
+info:
+  title: Blizzard API
+  version: 0.1.0
+  description: An OpenAPI specification for Blizzard API
+servers:
+  - url: https://{region}.api.blizzard.com
+    variables:
+      region:
+        description: API data is limited to specific regions
+        default: eu
+        enum:
+          - eu
+          - us
+          - kr
+          - tw
+tags:
+  - name: Playable Race API
+  - name: Playable Class API
+security:
+  - openId:
+    - openid
+    - wow.profile
+paths:
+#################################### Playable Class API START ############################# 
+  /data/wow/playable-class/index:
+    get:
+      tags:
+        - Playable Class API
+      summary: Returns an index of playable races.
+      operationId: getPlayableClassesIndex
+      parameters:
+        - in: query
+          name: namespace
+          schema:
+            type: string
+            default: static-eu
+          required: true
+      responses:
+        '200':
+          description: Http 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/playableClassesIndexDTO'
+        '4XX': 
+          description: Http 4XX
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiErrorDTO'
+  /data/wow/playable-class/{classId}:
+    get:
+      tags:
+        - Playable Class API
+      summary: Returns a playable class by ID.
+      operationId: getPlayableClass
+      parameters:
+        - in: query
+          name: namespace
+          schema:
+            type: string
+            default: static-eu
+          required: true
+        - in: path
+          name: classId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Http 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/playableClassDetailsDTO'
+        '4XX': 
+          description: Http 4XX
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiErrorDTO'
+#################################### Playable Class API END ############################# 
+#################################### Playable Race API START ############################# 
+  /data/wow/playable-race/index:
+    get:
+      tags:
+        - Playable Race API
+      summary: Returns an index of playable races.
+      operationId: getPlayableRacesIndex
+      parameters:
+        - in: query
+          name: namespace
+          schema:
+            type: string
+            default: static-eu
+          required: true
+      responses:
+        '200':
+          description: Http 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/playableRacesIndexDTO'
+        '4XX': 
+          description: Http 4XX
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiErrorDTO'
+  /data/wow/playable-race/{playableRaceId}:
+    get:
+      tags:
+        - Playable Race API
+      summary: Returns a playable race by ID.
+      operationId: getPlayableRace
+      parameters:
+        - in: query
+          name: namespace
+          schema:
+            type: string
+            default: static-eu
+          required: true
+        - in: path
+          name: playableRaceId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Http 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/playableRaceDetailsDTO'
+        '4XX': 
+          description: Http 4XX
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiErrorDTO'
+#################################### Playable Race API END ############################# 
+components:
+  securitySchemes:
+    openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
+      type: openIdConnect
+      openIdConnectUrl: https://oauth.battle.net/.well-known/openid-configuration
+  schemas:
+#################################### DTO START ######################################
+    apiErrorDTO:
+      type: object
+      properties:
+        code:
+          type: integer
+        type:
+          type: string
+        detail:
+          type: string
+      required:
+        - code
+        - type
+        - detail
+    nameDataDTO:
+      type: object
+      properties:
+        en_US:
+          type: string
+        es_MX:
+          type: string
+        pt_BR:
+          type: string
+        de_DE:
+          type: string
+        en_GB:
+          type: string
+        es_ES:
+          type: string
+        fr_FR:
+          type: string
+        it_IT:
+          type: string
+        ru_RU:
+          type: string
+        ko_KR:
+          type: string
+        zh_TW:
+          type: string
+        zh_CN:
+          type: string
+      required:
+        - en_US
+        - es_MX
+        - pt_BR
+        - de_DE
+        - en_GB
+        - es_ES
+        - fr_FR
+        - it_IT
+        - ru_RU
+        - ko_KR
+        - zh_TW
+        - zh_CN
+    linksSelfHrefDTO:
+      type: object
+      properties:
+        self :
+          $ref: '#/components/schemas/selfHrefDTO'
+      required:
+        - self
+    selfHrefDTO:
+      type: object
+      properties:
+        href: 
+          type: string
+      required:
+        - href
+    keyHrefDTO:
+      type: object
+      properties:
+        href: 
+          type: string
+      required:
+        - href
+    indexDataDTO:
+      type: object
+      properties:
+        key:
+          $ref: '#/components/schemas/keyHrefDTO'
+        name:
+          $ref: "#/components/schemas/nameDataDTO"
+        id:
+          type: integer
+      required:
+        - key
+        - name
+        - id
+    genderDTO:
+      type: object
+      properties:
+        male:
+          $ref: "#/components/schemas/nameDataDTO"
+        female:
+          $ref: "#/components/schemas/nameDataDTO"
+      required:
+        - male
+        - female
+    playableRacesIndexDTO:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/selfHrefDTO'
+        races:
+          type: array
+          items:
+            $ref: '#/components/schemas/indexDataDTO'
+      required:
+        - _links
+        - races
+    playableClassesIndexDTO:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/selfHrefDTO'
+        classes:
+          type: array
+          items:
+            $ref: '#/components/schemas/indexDataDTO'
+      required:
+        - _links
+        - races
+    factionPlayableRaceDTO:
+      type: object
+      properties:
+        type:
+          type: string
+        name:
+          $ref: "#/components/schemas/nameDataDTO"
+      required:
+        - type
+        - name
+    playableRaceDetailsDTO:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/selfHrefDTO'
+        id:
+          type: integer
+        name:
+          $ref: "#/components/schemas/nameDataDTO"
+        gender_name:
+          $ref: "#/components/schemas/genderDTO"
+        faction:
+          $ref: "#/components/schemas/factionPlayableRaceDTO"
+        is_selectable:
+          type: boolean
+        is_allied_race:
+          type: boolean
+        playable_classes:
+          type: array
+          items:
+            $ref: '#/components/schemas/indexDataDTO'
+      required:
+        - _links
+        - id
+        - name
+        - gender_name
+        - faction
+        - is_selectable
+        - is_allied_race
+        - playable_classes
+    playableClassDetailsDTO:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/selfHrefDTO'
+        id:
+          type: integer
+        name:
+          $ref: "#/components/schemas/nameDataDTO"
+        gender_name:
+          $ref: "#/components/schemas/genderDTO"
+        power_type:
+          $ref: "#/components/schemas/indexDataDTO"
+        is_selectable:
+          type: boolean
+        is_allied_race:
+          type: boolean
+        specializations:
+          type: array
+          items:
+            $ref: '#/components/schemas/indexDataDTO'
+        media:
+          $ref: "#/components/schemas/keyHrefDTO"
+        pvp_talent_slots:
+          type: string
+        playable_races:
+          type: array
+          items:
+            $ref: '#/components/schemas/indexDataDTO'
+      required:
+        - _links
+        - id
+        - name
+        - gender_name
+        - power_type
+        - is_selectable
+        - is_allied_race
+        - specializations
+        - media
+        - pvp_talent_slots
+        - playable_races
+#################################### DTO END ######################################## 
