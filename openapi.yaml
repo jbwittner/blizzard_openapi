@@ -198,38 +198,14 @@ components:
         - ko_KR
         - zh_TW
         - zh_CN
-    LinksSelfHrefDTO:
-      type: object
-      properties:
-        self :
-          $ref: '#/components/schemas/SelfHrefDTO'
-      required:
-        - self
-    SelfHrefDTO:
-      type: object
-      properties:
-        href: 
-          type: string
-      required:
-        - href
-    KeyHrefDTO:
-      type: object
-      properties:
-        href: 
-          type: string
-      required:
-        - href
     IndexDataDTO:
       type: object
       properties:
-        key:
-          $ref: '#/components/schemas/KeyHrefDTO'
         name:
           $ref: "#/components/schemas/NameDataDTO"
         id:
           type: integer
       required:
-        - key
         - name
         - id
     GenderDTO:
@@ -245,26 +221,20 @@ components:
     PlayableRacesIndexDTO:
       type: object
       properties:
-        _links:
-          $ref: '#/components/schemas/SelfHrefDTO'
         races:
           type: array
           items:
             $ref: '#/components/schemas/IndexDataDTO'
       required:
-        - _links
         - races
     PlayableClassesIndexDTO:
       type: object
       properties:
-        _links:
-          $ref: '#/components/schemas/SelfHrefDTO'
         classes:
           type: array
           items:
             $ref: '#/components/schemas/IndexDataDTO'
       required:
-        - _links
         - races
     FactionPlayableRaceDTO:
       type: object
@@ -279,8 +249,6 @@ components:
     PlayableRaceDetailsDTO:
       type: object
       properties:
-        _links:
-          $ref: '#/components/schemas/SelfHrefDTO'
         id:
           type: integer
         name:
@@ -298,7 +266,6 @@ components:
           items:
             $ref: '#/components/schemas/IndexDataDTO'
       required:
-        - _links
         - id
         - name
         - gender_name
@@ -309,8 +276,6 @@ components:
     PlayableClassDetailsDTO:
       type: object
       properties:
-        _links:
-          $ref: '#/components/schemas/LinksSelfHrefDTO'
         id:
           type: integer
         name:
@@ -323,8 +288,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IndexDataDTO'
-        media:
-          $ref: "#/components/schemas/KeyHrefDTO"
         pvp_talent_slots:
           type: string
         playable_races:
@@ -332,7 +295,6 @@ components:
           items:
             $ref: '#/components/schemas/IndexDataDTO'
       required:
-        - _links
         - id
         - name
         - gender_name
@@ -340,7 +302,6 @@ components:
         - is_selectable
         - is_allied_race
         - specializations
-        - media
         - pvp_talent_slots
         - playable_races
 #################################### DTO END ######################################## 
