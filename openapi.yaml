@@ -288,8 +288,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IndexDataDTO'
-        pvp_talent_slots:
-          type: string
         playable_races:
           type: array
           items:
@@ -302,6 +300,5 @@ components:
         - is_selectable
         - is_allied_race
         - specializations
-        - pvp_talent_slots
         - playable_races
 #################################### DTO END ######################################## 
