@@ -21,6 +21,7 @@ security:
   - openId:
     - openid
     - wow.profile
+  - accessToken: []
 paths:
 #################################### Playable Class API START ############################# 
   /data/wow/playable-class/index:
@@ -145,7 +146,7 @@ components:
     openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
       type: openIdConnect
       openIdConnectUrl: https://oauth.battle.net/.well-known/openid-configuration
-    test:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
+    accessToken:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
       type: http
       scheme: bearer
   schemas:
