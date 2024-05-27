@@ -18,6 +18,9 @@ tags:
   - name: Playable Race API
   - name: Playable Class API
 security:
+  - openId:
+    - openid
+    - wow.profile
   - accessToken: []
 paths:
 #################################### Playable Class API START ############################# 
