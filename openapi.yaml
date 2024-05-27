@@ -310,7 +310,7 @@ components:
       type: object
       properties:
         _links:
-          $ref: '#/components/schemas/SelfHrefDTO'
+          $ref: '#/components/schemas/LinksSelfHrefDTO'
         id:
           type: integer
         name:
