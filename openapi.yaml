@@ -18,6 +18,9 @@ tags:
   - name: Playable Race API
   - name: Playable Class API
 security:
+  - openId:
+    - openid
+    - wow.profile
   - accessToken: []
 paths:
 #################################### Playable Class API START ############################# 
@@ -40,13 +43,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/playableClassesIndexDTO'
+                $ref: '#/components/schemas/PlayableClassesIndexDTO'
         '4XX': 
           description: Http 4XX
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/apiErrorDTO'
+                $ref: '#/components/schemas/ApiErrorDTO'
   /data/wow/playable-class/{classId}:
     get:
       tags:
@@ -71,13 +74,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/playableClassDetailsDTO'
+                $ref: '#/components/schemas/PlayableClassDetailsDTO'
         '4XX': 
           description: Http 4XX
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/apiErrorDTO'
+                $ref: '#/components/schemas/ApiErrorDTO'
 #################################### Playable Class API END ############################# 
 #################################### Playable Race API START ############################# 
   /data/wow/playable-race/index:
@@ -99,13 +102,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/playableRacesIndexDTO'
+                $ref: '#/components/schemas/PlayableRacesIndexDTO'
         '4XX': 
           description: Http 4XX
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/apiErrorDTO'
+                $ref: '#/components/schemas/ApiErrorDTO'
   /data/wow/playable-race/{playableRaceId}:
     get:
       tags:
@@ -130,22 +133,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/playableRaceDetailsDTO'
+                $ref: '#/components/schemas/PlayableRaceDetailsDTO'
         '4XX': 
           description: Http 4XX
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/apiErrorDTO'
+                $ref: '#/components/schemas/ApiErrorDTO'
 #################################### Playable Race API END ############################# 
 components:
   securitySchemes:
+    openId:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
+      type: openIdConnect
+      openIdConnectUrl: https://oauth.battle.net/.well-known/openid-configuration
     accessToken:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
       type: http
       scheme: bearer
   schemas:
 #################################### DTO START ######################################
-    apiErrorDTO:
+    ApiErrorDTO:
       type: object
       properties:
         code:
@@ -158,7 +164,7 @@ components:
         - code
         - type
         - detail
-    nameDataDTO:
+    NameDataDTO:
       type: object
       properties:
         en_US:
@@ -198,97 +204,97 @@ components:
         - ko_KR
         - zh_TW
         - zh_CN
-    linksSelfHrefDTO:
+    LinksSelfHrefDTO:
       type: object
       properties:
         self :
-          $ref: '#/components/schemas/selfHrefDTO'
+          $ref: '#/components/schemas/SelfHrefDTO'
       required:
         - self
-    selfHrefDTO:
+    SelfHrefDTO:
       type: object
       properties:
         href: 
           type: string
       required:
         - href
-    keyHrefDTO:
+    KeyHrefDTO:
       type: object
       properties:
         href: 
           type: string
       required:
         - href
-    indexDataDTO:
+    IndexDataDTO:
       type: object
       properties:
         key:
-          $ref: '#/components/schemas/keyHrefDTO'
+          $ref: '#/components/schemas/KeyHrefDTO'
         name:
-          $ref: "#/components/schemas/nameDataDTO"
+          $ref: "#/components/schemas/NameDataDTO"
         id:
           type: integer
       required:
         - key
         - name
         - id
-    genderDTO:
+    GenderDTO:
       type: object
       properties:
         male:
-          $ref: "#/components/schemas/nameDataDTO"
+          $ref: "#/components/schemas/NameDataDTO"
         female:
-          $ref: "#/components/schemas/nameDataDTO"
+          $ref: "#/components/schemas/NameDataDTO"
       required:
         - male
         - female
-    playableRacesIndexDTO:
+    PlayableRacesIndexDTO:
       type: object
       properties:
         _links:
-          $ref: '#/components/schemas/selfHrefDTO'
+          $ref: '#/components/schemas/SelfHrefDTO'
         races:
           type: array
           items:
-            $ref: '#/components/schemas/indexDataDTO'
+            $ref: '#/components/schemas/IndexDataDTO'
       required:
         - _links
         - races
-    playableClassesIndexDTO:
+    PlayableClassesIndexDTO:
       type: object
       properties:
         _links:
-          $ref: '#/components/schemas/selfHrefDTO'
+          $ref: '#/components/schemas/SelfHrefDTO'
         classes:
           type: array
           items:
-            $ref: '#/components/schemas/indexDataDTO'
+            $ref: '#/components/schemas/IndexDataDTO'
       required:
         - _links
         - races
-    factionPlayableRaceDTO:
+    FactionPlayableRaceDTO:
       type: object
       properties:
         type:
           type: string
         name:
-          $ref: "#/components/schemas/nameDataDTO"
+          $ref: "#/components/schemas/NameDataDTO"
       required:
         - type
         - name
-    playableRaceDetailsDTO:
+    PlayableRaceDetailsDTO:
       type: object
       properties:
         _links:
-          $ref: '#/components/schemas/selfHrefDTO'
+          $ref: '#/components/schemas/SelfHrefDTO'
         id:
           type: integer
         name:
-          $ref: "#/components/schemas/nameDataDTO"
+          $ref: "#/components/schemas/NameDataDTO"
         gender_name:
-          $ref: "#/components/schemas/genderDTO"
+          $ref: "#/components/schemas/GenderDTO"
         faction:
-          $ref: "#/components/schemas/factionPlayableRaceDTO"
+          $ref: "#/components/schemas/FactionPlayableRaceDTO"
         is_selectable:
           type: boolean
         is_allied_race:
@@ -296,7 +302,7 @@ components:
         playable_classes:
           type: array
           items:
-            $ref: '#/components/schemas/indexDataDTO'
+            $ref: '#/components/schemas/IndexDataDTO'
       required:
         - _links
         - id
@@ -306,35 +312,31 @@ components:
         - is_selectable
         - is_allied_race
         - playable_classes
-    playableClassDetailsDTO:
+    PlayableClassDetailsDTO:
       type: object
       properties:
         _links:
-          $ref: '#/components/schemas/selfHrefDTO'
+          $ref: '#/components/schemas/SelfHrefDTO'
         id:
           type: integer
         name:
-          $ref: "#/components/schemas/nameDataDTO"
+          $ref: "#/components/schemas/NameDataDTO"
         gender_name:
-          $ref: "#/components/schemas/genderDTO"
+          $ref: "#/components/schemas/GenderDTO"
         power_type:
-          $ref: "#/components/schemas/indexDataDTO"
-        is_selectable:
-          type: boolean
-        is_allied_race:
-          type: boolean
+          $ref: "#/components/schemas/IndexDataDTO"
         specializations:
           type: array
           items:
-            $ref: '#/components/schemas/indexDataDTO'
+            $ref: '#/components/schemas/IndexDataDTO'
         media:
-          $ref: "#/components/schemas/keyHrefDTO"
+          $ref: "#/components/schemas/KeyHrefDTO"
         pvp_talent_slots:
           type: string
         playable_races:
           type: array
           items:
-            $ref: '#/components/schemas/indexDataDTO'
+            $ref: '#/components/schemas/IndexDataDTO'
       required:
         - _links
         - id
