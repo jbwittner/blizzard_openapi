@@ -10,6 +10,7 @@ ifneq (,$(wildcard ./.env))
 endif
 
 # Command to get a token
+.PHONY: get-token
 get-token:
 	curl -u $$OAUTH_CLIENT_ID:$$OAUTH_CLIENT_SECRET -d grant_type=client_credentials https://oauth.battle.net/token
 
@@ -17,6 +18,13 @@ get-token:
 .PHONY: clean
 clean:
 	rm -rf $(GENERATED_DIR)
+
+.PHONY: validate
+validate:
+	docker run --rm \
+	  -v $$PWD:/local \
+      $(DOCKER_IMAGE) validate \
+      -i $(OPENAPI_SPEC)
 
 .PHONY: generate
 generate:
@@ -40,11 +48,4 @@ install:
 	mvn clean install -f $(GENERATED_DIR_JAVA)/pom.xml
 
 .PHONY: all
-all: clean generate install
-
-.PHONY: publish
-publish: 
-	mvn -f generated/java/pom.xml deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/jbwittner/blizzard_openapi
-
-.PHONY: deploy
-deploy: publish
+all: clean validate generate install

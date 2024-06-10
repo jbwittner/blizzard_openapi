@@ -2,9 +2,6 @@ name: Develop CI
 on:
   release:
     types: [released]
-  pull_request:
-    branches:
-      - main
 jobs:
   build-package-deploy-java:
     runs-on: ubuntu-22.04
