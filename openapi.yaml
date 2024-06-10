@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Blizzard API
-  version: 0.2.0
+  version: 0.2.1
   description: An OpenAPI specification for Blizzard API
 servers:
   - url: https://{region}.api.blizzard.com
@@ -261,6 +261,13 @@ components:
       required:
         - name
         - id
+    IndexDataWithoutIdDTO:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+      required:
+        - name
     GenderDTO:
       type: object
       properties:
@@ -414,7 +421,7 @@ components:
           items:
             $ref: '#/components/schemas/TalentIndexDTO'
         spec_talent_tree:
-          $ref: '#/components/schemas/IndexDataDTO'
+          $ref: '#/components/schemas/IndexDataWithoutIdDTO'
         power_type:
           $ref: '#/components/schemas/IndexDataDTO'
         primary_stat_type:
