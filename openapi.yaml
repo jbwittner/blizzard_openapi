@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Blizzard API
-  version: 0.0.1
+  version: 0.1.0
   description: An OpenAPI specification for Blizzard API
 servers:
   - url: https://{region}.api.blizzard.com
