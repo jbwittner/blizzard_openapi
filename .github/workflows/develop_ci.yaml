@@ -6,7 +6,7 @@ on:
     branches:
       - main
 jobs:
-  build-package-java:
+  build-package-deploy-java:
     runs-on: ubuntu-22.04
     permissions:
       packages: write
@@ -26,9 +26,9 @@ jobs:
           cache-name: cache-maven
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{hashFiles('generated/java/pom.xm')}}
+          key: ${{ runner.os }}-maven-${{hashFiles('generated/java/pom.xml')}}
           restore-keys: ${{ runner.os }}-maven-
-      - name: Install java part
+      - name: Deploy java part
         run: mvn -B clean deploy -f generated/java/pom.xml -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/jbwittner/blizzard_openapi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
