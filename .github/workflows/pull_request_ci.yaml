@@ -32,8 +32,17 @@ jobs:
           --model-package=com.blizzardapi.openapi.model
           --additional-properties=dateLibrary=java8
           --additional-properties=hideGenerationTimestamp=true
-      - name: Check if files changed
-        run: git diff --exit-code
+      - name: Check for file changes
+        run: |
+          # Récupérer la branche principale pour comparaison
+          git fetch origin main
+          # Vérifier les modifications de fichiers
+          if git diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD main) | grep -q .; then
+            echo "Des modifications de fichiers ont été détectées"
+            git diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD main)
+            exit 1  # Fait échouer le workflow
+          else
+            echo "Aucune modification de fichier détectée."
   build-package-java:
     runs-on: ubuntu-22.04
     needs:
