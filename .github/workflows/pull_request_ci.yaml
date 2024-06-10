@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: openapitools/openapi-generator-cli:v7.2.0
-      volumes:
-        - $$PWD:/local
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v4
