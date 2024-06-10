@@ -2,70 +2,19 @@ name: Pull Request CI
 on:
   pull_request:
     branches:
-      - main
+      - develop
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
 jobs:
   check_openapi:
     runs-on: ubuntu-22.04
-    #container:
-    #  image: openapitools/openapi-generator-cli:v7.2.0
+    container:
+      image: openapitools/openapi-generator-cli:v7.2.0
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: test
-        run: ls -al
-      - name: Check OpenAPI
-        run: docker run --rm -v $$PWD:/local openapitools/openapi-generator-cli:v7.2.0 ls -al /local
       - name: Check OpenAPI
         run: docker-entrypoint.sh validate -i openapi.yaml
-      - name: Generate Java
-        run: docker-entrypoint.sh generate
-          -i openapi.yaml
-          -g java
-          -o generated/java
-          --api-package=com.blizzardapi.openapi
-          --additional-properties=disallowAdditionalPropertiesIfNotPresent=false 
-          --additional-properties=groupId=com.blizzardapi
-          --additional-properties=artifactId=openapi
-          --model-package=com.blizzardapi.openapi.model
-          --additional-properties=dateLibrary=java8
-          --additional-properties=hideGenerationTimestamp=true
-      - name: Check for file changes
-        run: |
-          # Récupérer la branche principale pour comparaison
-          git fetch origin main
-          # Vérifier les modifications de fichiers
-          if git diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD main) | grep -q .; then
-            echo "Des modifications de fichiers ont été détectées"
-            git diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD main)
-            exit 1  # Fait échouer le workflow
-          else
-            echo "Aucune modification de fichier détectée."
-  build-package-java:
-    runs-on: ubuntu-22.04
-    needs:
-      - check_openapi
-    steps:
-      - name: Checkout Git repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-      - name: Cache maven
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-maven
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('generated/java/pom.xm') }}
-          restore-keys: ${{ runner.os }}-maven-
-      - name: Package java part
-        run: mvn -B clean package -f generated/java/pom.xml
