@@ -1,0 +1,1128 @@
+openapi: 3.0.3
+info:
+  description: An OpenAPI specification for Blizzard API
+  title: Blizzard API
+  version: 0.0.1
+servers:
+- url: "https://{region}.api.blizzard.com"
+  variables:
+    region:
+      default: eu
+      description: API data is limited to specific regions
+      enum:
+      - eu
+      - us
+      - kr
+      - tw
+security:
+- accessToken: []
+tags:
+- name: Playable Race API
+- name: Playable Class API
+- name: Playable Specialization API
+paths:
+  /data/wow/playable-class/index:
+    get:
+      operationId: getPlayableClassesIndex
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: static-eu
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayableClassesIndexDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns an index of playable races.
+      tags:
+      - Playable Class API
+      x-accepts: application/json
+  /data/wow/playable-class/{classId}:
+    get:
+      operationId: getPlayableClass
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: static-eu
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: classId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayableClassDetailsDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns a playable class by ID.
+      tags:
+      - Playable Class API
+      x-accepts: application/json
+  /data/wow/playable-race/index:
+    get:
+      operationId: getPlayableRacesIndex
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: static-eu
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayableRacesIndexDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns an index of playable races.
+      tags:
+      - Playable Race API
+      x-accepts: application/json
+  /data/wow/playable-race/{playableRaceId}:
+    get:
+      operationId: getPlayableRace
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: static-eu
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: playableRaceId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayableRaceDetailsDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns a playable race by ID.
+      tags:
+      - Playable Race API
+      x-accepts: application/json
+  /data/wow/playable-specialization/index:
+    get:
+      operationId: getPlayableSpecializationsIndex
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: static-eu
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayableSpecializationIndexDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns an index of playable specializations.
+      tags:
+      - Playable Specialization API
+      x-accepts: application/json
+  /data/wow/playable-specialization/{specId}:
+    get:
+      operationId: getPlayableSpecialization
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: static-eu
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: specId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayableSpecializationDetailsDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns a playable race by ID.
+      tags:
+      - Playable Specialization API
+      x-accepts: application/json
+components:
+  schemas:
+    ApiErrorDTO:
+      properties:
+        code:
+          type: integer
+        type:
+          type: string
+        detail:
+          type: string
+      required:
+      - code
+      - detail
+      - type
+      type: object
+    NameDataDTO:
+      example:
+        it_IT: it_IT
+        ru_RU: ru_RU
+        en_GB: en_GB
+        zh_TW: zh_TW
+        ko_KR: ko_KR
+        en_US: en_US
+        es_MX: es_MX
+        pt_BR: pt_BR
+        es_ES: es_ES
+        zh_CN: zh_CN
+        fr_FR: fr_FR
+        de_DE: de_DE
+      properties:
+        en_US:
+          type: string
+        es_MX:
+          type: string
+        pt_BR:
+          type: string
+        de_DE:
+          type: string
+        en_GB:
+          type: string
+        es_ES:
+          type: string
+        fr_FR:
+          type: string
+        it_IT:
+          type: string
+        ru_RU:
+          type: string
+        ko_KR:
+          type: string
+        zh_TW:
+          type: string
+        zh_CN:
+          type: string
+      required:
+      - de_DE
+      - en_GB
+      - en_US
+      - es_ES
+      - es_MX
+      - fr_FR
+      - it_IT
+      - ko_KR
+      - pt_BR
+      - ru_RU
+      - zh_CN
+      - zh_TW
+      type: object
+    IndexDataDTO:
+      example:
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        id: 0
+      properties:
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        id:
+          type: integer
+      required:
+      - id
+      - name
+      type: object
+    GenderDTO:
+      example:
+        female:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        male:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+      properties:
+        male:
+          $ref: '#/components/schemas/NameDataDTO'
+        female:
+          $ref: '#/components/schemas/NameDataDTO'
+      required:
+      - female
+      - male
+      type: object
+    PlayableRacesIndexDTO:
+      example:
+        races:
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+      properties:
+        races:
+          items:
+            $ref: '#/components/schemas/IndexDataDTO'
+          type: array
+      required:
+      - races
+      type: object
+    PlayableClassesIndexDTO:
+      example:
+        classes:
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+      properties:
+        classes:
+          items:
+            $ref: '#/components/schemas/IndexDataDTO'
+          type: array
+      required:
+      - classes
+      type: object
+    PlayableSpecializationIndexDTO:
+      example:
+        character_specializations:
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        pet_specializations:
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+      properties:
+        character_specializations:
+          items:
+            $ref: '#/components/schemas/IndexDataDTO'
+          type: array
+        pet_specializations:
+          items:
+            $ref: '#/components/schemas/IndexDataDTO'
+          type: array
+      required:
+      - character_specializations
+      - pet_specializations
+      type: object
+    FactionPlayableRaceDTO:
+      example:
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        type: type
+      properties:
+        type:
+          type: string
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+      required:
+      - name
+      - type
+      type: object
+    PlayableRaceDetailsDTO:
+      example:
+        is_selectable: true
+        is_allied_race: true
+        playable_classes:
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        faction:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          type: type
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        id: 0
+        gender_name:
+          female:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          male:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+      properties:
+        id:
+          type: integer
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        gender_name:
+          $ref: '#/components/schemas/GenderDTO'
+        faction:
+          $ref: '#/components/schemas/FactionPlayableRaceDTO'
+        is_selectable:
+          type: boolean
+        is_allied_race:
+          type: boolean
+        playable_classes:
+          items:
+            $ref: '#/components/schemas/IndexDataDTO'
+          type: array
+      required:
+      - faction
+      - gender_name
+      - id
+      - is_allied_race
+      - is_selectable
+      - name
+      - playable_classes
+      type: object
+    PlayableClassDetailsDTO:
+      example:
+        specializations:
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        playable_races:
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        id: 0
+        power_type:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        gender_name:
+          female:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          male:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+      properties:
+        id:
+          type: integer
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        gender_name:
+          $ref: '#/components/schemas/GenderDTO'
+        power_type:
+          $ref: '#/components/schemas/NameDataDTO'
+        specializations:
+          items:
+            $ref: '#/components/schemas/IndexDataDTO'
+          type: array
+        playable_races:
+          items:
+            $ref: '#/components/schemas/IndexDataDTO'
+          type: array
+      required:
+      - gender_name
+      - id
+      - name
+      - playable_races
+      - power_type
+      - specializations
+      type: object
+    RoleIndexDTO:
+      example:
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        type: type
+      properties:
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        type:
+          type: string
+      required:
+      - name
+      - type
+      type: object
+    TalentIndexDTO:
+      example:
+        talent:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        spell_tooltip:
+          cast_time:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          description:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+      properties:
+        talent:
+          $ref: '#/components/schemas/IndexDataDTO'
+        spell_tooltip:
+          $ref: '#/components/schemas/TalentDescritpionIndexDTO'
+      required:
+      - spell_tooltip
+      - talent
+      type: object
+    TalentDescritpionIndexDTO:
+      example:
+        cast_time:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        description:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+      properties:
+        description:
+          $ref: '#/components/schemas/NameDataDTO'
+        cast_time:
+          $ref: '#/components/schemas/NameDataDTO'
+      required:
+      - cast_time
+      - description
+      type: object
+    PlayableSpecializationDetailsDTO:
+      example:
+        pvp_talents:
+        - talent:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            id: 0
+          spell_tooltip:
+            cast_time:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            description:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+        - talent:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            id: 0
+          spell_tooltip:
+            cast_time:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            description:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+        role:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          type: type
+        playable_class:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        spec_talent_tree:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        gender_description:
+          female:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          male:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+        id: 0
+        power_type:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        primary_stat_type:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          type: type
+      properties:
+        id:
+          type: integer
+        playable_class:
+          $ref: '#/components/schemas/IndexDataDTO'
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        gender_description:
+          $ref: '#/components/schemas/GenderDTO'
+        role:
+          $ref: '#/components/schemas/RoleIndexDTO'
+        pvp_talents:
+          items:
+            $ref: '#/components/schemas/TalentIndexDTO'
+          type: array
+        spec_talent_tree:
+          $ref: '#/components/schemas/NameDataDTO'
+        power_type:
+          $ref: '#/components/schemas/NameDataDTO'
+        primary_stat_type:
+          $ref: '#/components/schemas/RoleIndexDTO'
+      required:
+      - gender_description
+      - id
+      - name
+      - playable_class
+      - power_type
+      - primary_stat_type
+      - pvp_talents
+      - role
+      type: object
+  securitySchemes:
+    accessToken:
+      scheme: bearer
+      type: http
+
