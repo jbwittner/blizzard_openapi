@@ -27,7 +27,7 @@ jobs:
           cache-name: cache-maven
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('generated/java/pom.xm') }}
+          key: ${{ runner.os }}-maven-${{hashFiles('generated/java/pom.xm')}}
           restore-keys: ${{ runner.os }}-maven-
       - name: Install java part
         run: mvn -B clean deploy -f generated/java/pom.xml
