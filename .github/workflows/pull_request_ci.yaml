@@ -20,7 +20,7 @@ jobs:
         run: ls -al
       - name: Check OpenAPI
         #run: docker run --rm -v $$PWD:/local openapitools/openapi-generator-cli:v7.2.0 validate -i /local/openapi.yaml
-        run: docker-entrypoint.sh validate -i /local/openapi.yaml
+        run: docker-entrypoint.sh validate -i openapi.yaml
   build-package-java:
     runs-on: ubuntu-22.04
     needs:
