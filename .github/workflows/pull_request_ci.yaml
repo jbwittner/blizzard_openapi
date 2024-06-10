@@ -9,6 +9,10 @@ concurrency:
 jobs:
   check_openapi:
     runs-on: ubuntu-22.04
+    container:
+      image: openapitools/openapi-generator-cli:v7.2.0
+      volumes:
+        - $$PWD:/local
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v4
@@ -17,7 +21,8 @@ jobs:
       - name: test
         run: ls -al
       - name: Check OpenAPI
-        run: docker run --rm -v $$PWD:/local openapitools/openapi-generator-cli:v7.2.0 validate -i /local/openapi.yaml
+        #run: docker run --rm -v $$PWD:/local openapitools/openapi-generator-cli:v7.2.0 validate -i /local/openapi.yaml
+        run: validate -i /local/openapi.yaml
   build-package-java:
     runs-on: ubuntu-22.04
     needs:
