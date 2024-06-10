@@ -44,7 +44,7 @@ all: clean generate install
 
 .PHONY: publish
 publish: 
-	mvn -f openapi/java/pom.xml deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/jbwittner/blizzard_openapi
+	mvn -f generated/java/pom.xml deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/jbwittner/blizzard_openapi
 
 .PHONY: deploy
 deploy: publish
