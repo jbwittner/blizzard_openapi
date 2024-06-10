@@ -2,7 +2,7 @@ name: Pull Request CI
 on:
   pull_request:
     branches:
-      - main
+      - develop
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
@@ -28,5 +28,4 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('generated/java/pom.xm') }}
           restore-keys: ${{ runner.os }}-maven-
       - name: Package java part
-        #run: mvn -B clean package -f generated/java/pom.xml
-        run: mvn -B clean deploy -f generated/java/pom.xml -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/jbwittner/blizzard_openapi
+        run: mvn -B clean package -f generated/java/pom.xml

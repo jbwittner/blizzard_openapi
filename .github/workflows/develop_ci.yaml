@@ -2,13 +2,14 @@ name: Develop CI
 on:
   release:
     types: [released]
-env:
-  REGISTRY: ghcr.io
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  pull_request:
+    branches:
+      - main
 jobs:
   build-package-java:
     runs-on: ubuntu-22.04
+    permissions:
+      packages: write
     needs:
       - check_generation
     steps:
@@ -30,4 +31,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{hashFiles('generated/java/pom.xm')}}
           restore-keys: ${{ runner.os }}-maven-
       - name: Install java part
-        run: mvn -B clean deploy -f generated/java/pom.xml
+        run: mvn -B clean deploy -f generated/java/pom.xml -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/jbwittner/blizzard_openapi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
