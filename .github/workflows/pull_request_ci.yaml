@@ -19,8 +19,21 @@ jobs:
       - name: test
         run: ls -al
       - name: Check OpenAPI
-        #run: docker run --rm -v $$PWD:/local openapitools/openapi-generator-cli:v7.2.0 validate -i /local/openapi.yaml
         run: docker-entrypoint.sh validate -i openapi.yaml
+      - name: Generate Java
+        run: docker-entrypoint.sh generate \
+          -i openapi.yaml \
+          -g java \
+          -o generated/java \
+          --api-package=com.blizzardapi.openapi \
+          --additional-properties=disallowAdditionalPropertiesIfNotPresent=false \
+          --additional-properties=groupId=com.blizzardapi \
+          --additional-properties=artifactId=openapi \
+          --model-package=com.blizzardapi.openapi.model \
+          --additional-properties=dateLibrary=java8 \
+          --additional-properties=hideGenerationTimestamp=true
+      - name: Check if files changed
+        run: git diff --exit-code
   build-package-java:
     runs-on: ubuntu-22.04
     needs:
