@@ -21,16 +21,16 @@ jobs:
       - name: Check OpenAPI
         run: docker-entrypoint.sh validate -i openapi.yaml
       - name: Generate Java
-        run: docker-entrypoint.sh generate \
-          -i openapi.yaml \
-          -g java \
-          -o generated/java \
-          --api-package=com.blizzardapi.openapi \
-          --additional-properties=disallowAdditionalPropertiesIfNotPresent=false \
-          --additional-properties=groupId=com.blizzardapi \
-          --additional-properties=artifactId=openapi \
-          --model-package=com.blizzardapi.openapi.model \
-          --additional-properties=dateLibrary=java8 \
+        run: docker-entrypoint.sh generate
+          -i openapi.yaml
+          -g java
+          -o generated/java
+          --api-package=com.blizzardapi.openapi
+          --additional-properties=disallowAdditionalPropertiesIfNotPresent=false 
+          --additional-properties=groupId=com.blizzardapi
+          --additional-properties=artifactId=openapi
+          --model-package=com.blizzardapi.openapi.model
+          --additional-properties=dateLibrary=java8
           --additional-properties=hideGenerationTimestamp=true
       - name: Check if files changed
         run: git diff --exit-code
