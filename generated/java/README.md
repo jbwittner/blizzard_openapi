@@ -1,7 +1,7 @@
 # openapi
 
 Blizzard API
-- API version: 0.2.0
+- API version: 0.2.1
 
 An OpenAPI specification for Blizzard API
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.blizzardapi</groupId>
   <artifactId>openapi</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.blizzardapi:openapi:0.2.0"
+     implementation "com.blizzardapi:openapi:0.2.1"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-0.2.0.jar`
+* `target/openapi-0.2.1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -133,6 +133,7 @@ Class | Method | HTTP request | Description
  - [FactionPlayableRaceDTO](docs/FactionPlayableRaceDTO.md)
  - [GenderDTO](docs/GenderDTO.md)
  - [IndexDataDTO](docs/IndexDataDTO.md)
+ - [IndexDataWithoutIdDTO](docs/IndexDataWithoutIdDTO.md)
  - [NameDataDTO](docs/NameDataDTO.md)
  - [PlayableClassDetailsDTO](docs/PlayableClassDetailsDTO.md)
  - [PlayableClassesIndexDTO](docs/PlayableClassesIndexDTO.md)

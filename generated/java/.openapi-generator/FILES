@@ -10,6 +10,7 @@ docs/ApiErrorDTO.md
 docs/FactionPlayableRaceDTO.md
 docs/GenderDTO.md
 docs/IndexDataDTO.md
+docs/IndexDataWithoutIdDTO.md
 docs/NameDataDTO.md
 docs/PlayableClassApiApi.md
 docs/PlayableClassDetailsDTO.md
@@ -57,6 +58,7 @@ src/main/java/com/blizzardapi/openapi/model/ApiErrorDTO.java
 src/main/java/com/blizzardapi/openapi/model/FactionPlayableRaceDTO.java
 src/main/java/com/blizzardapi/openapi/model/GenderDTO.java
 src/main/java/com/blizzardapi/openapi/model/IndexDataDTO.java
+src/main/java/com/blizzardapi/openapi/model/IndexDataWithoutIdDTO.java
 src/main/java/com/blizzardapi/openapi/model/NameDataDTO.java
 src/main/java/com/blizzardapi/openapi/model/PlayableClassDetailsDTO.java
 src/main/java/com/blizzardapi/openapi/model/PlayableClassesIndexDTO.java
@@ -74,6 +76,7 @@ src/test/java/com/blizzardapi/openapi/model/ApiErrorDTOTest.java
 src/test/java/com/blizzardapi/openapi/model/FactionPlayableRaceDTOTest.java
 src/test/java/com/blizzardapi/openapi/model/GenderDTOTest.java
 src/test/java/com/blizzardapi/openapi/model/IndexDataDTOTest.java
+src/test/java/com/blizzardapi/openapi/model/IndexDataWithoutIdDTOTest.java
 src/test/java/com/blizzardapi/openapi/model/NameDataDTOTest.java
 src/test/java/com/blizzardapi/openapi/model/PlayableClassDetailsDTOTest.java
 src/test/java/com/blizzardapi/openapi/model/PlayableClassesIndexDTOTest.java
