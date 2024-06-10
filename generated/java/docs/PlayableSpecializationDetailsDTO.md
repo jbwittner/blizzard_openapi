@@ -13,8 +13,8 @@
 |**genderDescription** | [**GenderDTO**](GenderDTO.md) |  |  |
 |**role** | [**RoleIndexDTO**](RoleIndexDTO.md) |  |  |
 |**pvpTalents** | [**List&lt;TalentIndexDTO&gt;**](TalentIndexDTO.md) |  |  |
-|**specTalentTree** | [**NameDataDTO**](NameDataDTO.md) |  |  [optional] |
-|**powerType** | [**NameDataDTO**](NameDataDTO.md) |  |  |
+|**specTalentTree** | [**IndexDataDTO**](IndexDataDTO.md) |  |  [optional] |
+|**powerType** | [**IndexDataDTO**](IndexDataDTO.md) |  |  |
 |**primaryStatType** | [**RoleIndexDTO**](RoleIndexDTO.md) |  |  |
 
 

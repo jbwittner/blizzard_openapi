@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Blizzard API
-  version: 0.1.0
+  version: 0.2.0
   description: An OpenAPI specification for Blizzard API
 servers:
   - url: https://{region}.api.blizzard.com
@@ -21,7 +21,6 @@ tags:
 security:
   - accessToken: []
 paths:
-  #################################### Playable Class API START #############################
   /data/wow/playable-class/index:
     get:
       tags:
@@ -42,7 +41,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlayableClassesIndexDTO'
-        '4XX':
+        4XX:
           description: Http 4XX
           content:
             application/json:
@@ -73,14 +72,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlayableClassDetailsDTO'
-        '4XX':
+        4XX:
           description: Http 4XX
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorDTO'
-  #################################### Playable Class API END #############################
-  #################################### Playable Race API START #############################
   /data/wow/playable-race/index:
     get:
       tags:
@@ -101,7 +98,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlayableRacesIndexDTO'
-        '4XX':
+        4XX:
           description: Http 4XX
           content:
             application/json:
@@ -132,14 +129,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlayableRaceDetailsDTO'
-        '4XX':
+        4XX:
           description: Http 4XX
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorDTO'
-  #################################### Playable Race API END #############################
-  #################################### Playable Specialization API START #############################
   /data/wow/playable-specialization/index:
     get:
       tags:
@@ -160,7 +155,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlayableSpecializationIndexDTO'
-        '4XX':
+        4XX:
           description: Http 4XX
           content:
             application/json:
@@ -191,20 +186,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlayableSpecializationDetailsDTO'
-        '4XX':
+        4XX:
           description: Http 4XX
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorDTO'
-#################################### Playable Specialization API END #############################
 components:
   securitySchemes:
-    accessToken:   # <--- Arbitrary name for the security scheme. Used to refer to it from elsewhere.
+    accessToken:
       type: http
       scheme: bearer
   schemas:
-    #################################### DTO START ######################################
     ApiErrorDTO:
       type: object
       properties:
@@ -262,7 +255,7 @@ components:
       type: object
       properties:
         name:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
         id:
           type: integer
       required:
@@ -272,9 +265,9 @@ components:
       type: object
       properties:
         male:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
         female:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
       required:
         - male
         - female
@@ -316,7 +309,7 @@ components:
         type:
           type: string
         name:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
       required:
         - type
         - name
@@ -326,11 +319,11 @@ components:
         id:
           type: integer
         name:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
         gender_name:
-          $ref: "#/components/schemas/GenderDTO"
+          $ref: '#/components/schemas/GenderDTO'
         faction:
-          $ref: "#/components/schemas/FactionPlayableRaceDTO"
+          $ref: '#/components/schemas/FactionPlayableRaceDTO'
         is_selectable:
           type: boolean
         is_allied_race:
@@ -353,11 +346,11 @@ components:
         id:
           type: integer
         name:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
         gender_name:
-          $ref: "#/components/schemas/GenderDTO"
+          $ref: '#/components/schemas/GenderDTO'
         power_type:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
         specializations:
           type: array
           items:
@@ -377,7 +370,7 @@ components:
       type: object
       properties:
         name:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
         type:
           type: string
       required:
@@ -387,9 +380,9 @@ components:
       type: object
       properties:
         talent:
-          $ref: "#/components/schemas/IndexDataDTO"
+          $ref: '#/components/schemas/IndexDataDTO'
         spell_tooltip:
-          $ref: "#/components/schemas/TalentDescritpionIndexDTO"
+          $ref: '#/components/schemas/TalentDescritpionIndexDTO'
       required:
         - talent
         - spell_tooltip
@@ -397,9 +390,9 @@ components:
       type: object
       properties:
         description:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
         cast_time:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
       required:
         - description
         - cast_time
@@ -409,23 +402,23 @@ components:
         id:
           type: integer
         playable_class:
-          $ref: "#/components/schemas/IndexDataDTO"
+          $ref: '#/components/schemas/IndexDataDTO'
         name:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/NameDataDTO'
         gender_description:
-          $ref: "#/components/schemas/GenderDTO"
+          $ref: '#/components/schemas/GenderDTO'
         role:
-          $ref: "#/components/schemas/RoleIndexDTO"
+          $ref: '#/components/schemas/RoleIndexDTO'
         pvp_talents:
           type: array
           items:
             $ref: '#/components/schemas/TalentIndexDTO'
         spec_talent_tree:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/IndexDataDTO'
         power_type:
-          $ref: "#/components/schemas/NameDataDTO"
+          $ref: '#/components/schemas/IndexDataDTO'
         primary_stat_type:
-          $ref: "#/components/schemas/RoleIndexDTO"
+          $ref: '#/components/schemas/RoleIndexDTO'
       required:
         - id
         - playable_class
@@ -435,4 +428,3 @@ components:
         - pvp_talents
         - power_type
         - primary_stat_type
-#################################### DTO END ########################################
