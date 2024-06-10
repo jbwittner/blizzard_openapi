@@ -19,7 +19,7 @@ jobs:
       - name: test
         run: ls -al
       - name: Check OpenAPI
-        run: docker run --rm -v $$PWD:/local openapitools/openapi-generator-cli:v7.2.0 ls -al
+        run: docker run --rm -v $$PWD:/local openapitools/openapi-generator-cli:v7.2.0 ls -al /local
       - name: Check OpenAPI
         run: docker-entrypoint.sh validate -i openapi.yaml
       - name: Generate Java
