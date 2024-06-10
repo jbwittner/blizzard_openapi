@@ -1,0 +1,12 @@
+services:
+  swaggerui:
+    image: swaggerapi/swagger-ui:v5.17.12
+    container_name: swagger_blizzard_api
+    ports:
+      - '9080:8080'
+    volumes:
+      - ./:/tmp
+    environment:
+      SWAGGER_JSON: /tmp/openapi.yaml
+    env_file:
+      - .env

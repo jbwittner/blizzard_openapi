@@ -1,0 +1,42 @@
+name: Pull Request CI
+on:
+  pull_request:
+    branches:
+      - main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+jobs:
+  check_openapi:
+    runs-on: ubuntu-22.04
+    container:
+      image: openapitools/openapi-generator-cli:v7.2.0
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Check OpenAPI
+        run: docker-entrypoint.sh validate -i openapi.yaml
+  check_java:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - name: Cache maven
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-maven
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{hashFiles('generated/java/pom.xml')}}
+          restore-keys: ${{ runner.os }}-maven-
+      - name: Deploy java part
+        run: mvn -B clean package -f generated/java/pom.xml

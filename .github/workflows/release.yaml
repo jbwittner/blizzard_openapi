@@ -1,0 +1,31 @@
+name: Release CI
+on:
+  release:
+    types: [released]
+jobs:
+  build-package-deploy-java:
+    runs-on: ubuntu-22.04
+    permissions:
+      packages: write
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - name: Cache maven
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-maven
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{hashFiles('generated/java/pom.xml')}}
+          restore-keys: ${{ runner.os }}-maven-
+      - name: Deploy java part
+        run: mvn -B clean deploy -f generated/java/pom.xml -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/jbwittner/blizzard_openapi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
