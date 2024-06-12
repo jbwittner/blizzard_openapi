@@ -25,25 +25,17 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for FactionPlayableRaceDTO
+ * Model tests for IndexRealmDataDTO
  */
-public class FactionPlayableRaceDTOTest {
-    private final FactionPlayableRaceDTO model = new FactionPlayableRaceDTO();
+public class IndexRealmDataDTOTest {
+    private final IndexRealmDataDTO model = new IndexRealmDataDTO();
 
     /**
-     * Model tests for FactionPlayableRaceDTO
+     * Model tests for IndexRealmDataDTO
      */
     @Test
-    public void testFactionPlayableRaceDTO() {
-        // TODO: test FactionPlayableRaceDTO
-    }
-
-    /**
-     * Test the property 'type'
-     */
-    @Test
-    public void typeTest() {
-        // TODO: test type
+    public void testIndexRealmDataDTO() {
+        // TODO: test IndexRealmDataDTO
     }
 
     /**
@@ -52,6 +44,22 @@ public class FactionPlayableRaceDTOTest {
     @Test
     public void nameTest() {
         // TODO: test name
+    }
+
+    /**
+     * Test the property 'slug'
+     */
+    @Test
+    public void slugTest() {
+        // TODO: test slug
+    }
+
+    /**
+     * Test the property 'id'
+     */
+    @Test
+    public void idTest() {
+        // TODO: test id
     }
 
 }

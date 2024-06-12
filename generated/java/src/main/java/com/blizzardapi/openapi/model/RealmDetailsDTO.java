@@ -14,19 +14,16 @@
 package com.blizzardapi.openapi.model;
 
 import java.util.Objects;
-import com.blizzardapi.openapi.model.FactionPlayableRaceDTO;
-import com.blizzardapi.openapi.model.GenderDTO;
 import com.blizzardapi.openapi.model.IndexDataDTO;
 import com.blizzardapi.openapi.model.NameDataDTO;
+import com.blizzardapi.openapi.model.RealmTypeDTO;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,42 +50,50 @@ import java.util.Set;
 import com.blizzardapi.JSON;
 
 /**
- * PlayableRaceDetailsDTO
+ * RealmDetailsDTO
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class PlayableRaceDetailsDTO {
+public class RealmDetailsDTO {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
   private Integer id;
+
+  public static final String SERIALIZED_NAME_REGION = "region";
+  @SerializedName(SERIALIZED_NAME_REGION)
+  private IndexDataDTO region;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   private NameDataDTO name;
 
-  public static final String SERIALIZED_NAME_GENDER_NAME = "gender_name";
-  @SerializedName(SERIALIZED_NAME_GENDER_NAME)
-  private GenderDTO genderName;
+  public static final String SERIALIZED_NAME_CATEGORY = "category";
+  @SerializedName(SERIALIZED_NAME_CATEGORY)
+  private NameDataDTO category;
 
-  public static final String SERIALIZED_NAME_FACTION = "faction";
-  @SerializedName(SERIALIZED_NAME_FACTION)
-  private FactionPlayableRaceDTO faction;
+  public static final String SERIALIZED_NAME_LOCALE = "locale";
+  @SerializedName(SERIALIZED_NAME_LOCALE)
+  private String locale;
 
-  public static final String SERIALIZED_NAME_IS_SELECTABLE = "is_selectable";
-  @SerializedName(SERIALIZED_NAME_IS_SELECTABLE)
-  private Boolean isSelectable;
+  public static final String SERIALIZED_NAME_TIMEZONE = "timezone";
+  @SerializedName(SERIALIZED_NAME_TIMEZONE)
+  private String timezone;
 
-  public static final String SERIALIZED_NAME_IS_ALLIED_RACE = "is_allied_race";
-  @SerializedName(SERIALIZED_NAME_IS_ALLIED_RACE)
-  private Boolean isAlliedRace;
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
+  private RealmTypeDTO type;
 
-  public static final String SERIALIZED_NAME_PLAYABLE_CLASSES = "playable_classes";
-  @SerializedName(SERIALIZED_NAME_PLAYABLE_CLASSES)
-  private List<IndexDataDTO> playableClasses = new ArrayList<>();
+  public static final String SERIALIZED_NAME_IS_TOURNAMENT = "is_tournament";
+  @SerializedName(SERIALIZED_NAME_IS_TOURNAMENT)
+  private Boolean isTournament;
 
-  public PlayableRaceDetailsDTO() {
+  public static final String SERIALIZED_NAME_SLUG = "slug";
+  @SerializedName(SERIALIZED_NAME_SLUG)
+  private String slug;
+
+  public RealmDetailsDTO() {
   }
 
-  public PlayableRaceDetailsDTO id(Integer id) {
+  public RealmDetailsDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -107,7 +112,26 @@ public class PlayableRaceDetailsDTO {
   }
 
 
-  public PlayableRaceDetailsDTO name(NameDataDTO name) {
+  public RealmDetailsDTO region(IndexDataDTO region) {
+    this.region = region;
+    return this;
+  }
+
+   /**
+   * Get region
+   * @return region
+  **/
+  @javax.annotation.Nonnull
+  public IndexDataDTO getRegion() {
+    return region;
+  }
+
+  public void setRegion(IndexDataDTO region) {
+    this.region = region;
+  }
+
+
+  public RealmDetailsDTO name(NameDataDTO name) {
     this.name = name;
     return this;
   }
@@ -126,106 +150,117 @@ public class PlayableRaceDetailsDTO {
   }
 
 
-  public PlayableRaceDetailsDTO genderName(GenderDTO genderName) {
-    this.genderName = genderName;
+  public RealmDetailsDTO category(NameDataDTO category) {
+    this.category = category;
     return this;
   }
 
    /**
-   * Get genderName
-   * @return genderName
+   * Get category
+   * @return category
   **/
   @javax.annotation.Nonnull
-  public GenderDTO getGenderName() {
-    return genderName;
+  public NameDataDTO getCategory() {
+    return category;
   }
 
-  public void setGenderName(GenderDTO genderName) {
-    this.genderName = genderName;
+  public void setCategory(NameDataDTO category) {
+    this.category = category;
   }
 
 
-  public PlayableRaceDetailsDTO faction(FactionPlayableRaceDTO faction) {
-    this.faction = faction;
+  public RealmDetailsDTO locale(String locale) {
+    this.locale = locale;
     return this;
   }
 
    /**
-   * Get faction
-   * @return faction
+   * Get locale
+   * @return locale
   **/
   @javax.annotation.Nonnull
-  public FactionPlayableRaceDTO getFaction() {
-    return faction;
+  public String getLocale() {
+    return locale;
   }
 
-  public void setFaction(FactionPlayableRaceDTO faction) {
-    this.faction = faction;
+  public void setLocale(String locale) {
+    this.locale = locale;
   }
 
 
-  public PlayableRaceDetailsDTO isSelectable(Boolean isSelectable) {
-    this.isSelectable = isSelectable;
+  public RealmDetailsDTO timezone(String timezone) {
+    this.timezone = timezone;
     return this;
   }
 
    /**
-   * Get isSelectable
-   * @return isSelectable
+   * Get timezone
+   * @return timezone
   **/
   @javax.annotation.Nonnull
-  public Boolean getIsSelectable() {
-    return isSelectable;
+  public String getTimezone() {
+    return timezone;
   }
 
-  public void setIsSelectable(Boolean isSelectable) {
-    this.isSelectable = isSelectable;
+  public void setTimezone(String timezone) {
+    this.timezone = timezone;
   }
 
 
-  public PlayableRaceDetailsDTO isAlliedRace(Boolean isAlliedRace) {
-    this.isAlliedRace = isAlliedRace;
+  public RealmDetailsDTO type(RealmTypeDTO type) {
+    this.type = type;
     return this;
   }
 
    /**
-   * Get isAlliedRace
-   * @return isAlliedRace
+   * Get type
+   * @return type
   **/
   @javax.annotation.Nonnull
-  public Boolean getIsAlliedRace() {
-    return isAlliedRace;
+  public RealmTypeDTO getType() {
+    return type;
   }
 
-  public void setIsAlliedRace(Boolean isAlliedRace) {
-    this.isAlliedRace = isAlliedRace;
+  public void setType(RealmTypeDTO type) {
+    this.type = type;
   }
 
 
-  public PlayableRaceDetailsDTO playableClasses(List<IndexDataDTO> playableClasses) {
-    this.playableClasses = playableClasses;
-    return this;
-  }
-
-  public PlayableRaceDetailsDTO addPlayableClassesItem(IndexDataDTO playableClassesItem) {
-    if (this.playableClasses == null) {
-      this.playableClasses = new ArrayList<>();
-    }
-    this.playableClasses.add(playableClassesItem);
+  public RealmDetailsDTO isTournament(Boolean isTournament) {
+    this.isTournament = isTournament;
     return this;
   }
 
    /**
-   * Get playableClasses
-   * @return playableClasses
+   * Get isTournament
+   * @return isTournament
   **/
   @javax.annotation.Nonnull
-  public List<IndexDataDTO> getPlayableClasses() {
-    return playableClasses;
+  public Boolean getIsTournament() {
+    return isTournament;
   }
 
-  public void setPlayableClasses(List<IndexDataDTO> playableClasses) {
-    this.playableClasses = playableClasses;
+  public void setIsTournament(Boolean isTournament) {
+    this.isTournament = isTournament;
+  }
+
+
+  public RealmDetailsDTO slug(String slug) {
+    this.slug = slug;
+    return this;
+  }
+
+   /**
+   * Get slug
+   * @return slug
+  **/
+  @javax.annotation.Nonnull
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
   }
 
   /**
@@ -241,9 +276,9 @@ public class PlayableRaceDetailsDTO {
    *
    * @param key name of the property
    * @param value value of the property
-   * @return the PlayableRaceDetailsDTO instance itself
+   * @return the RealmDetailsDTO instance itself
    */
-  public PlayableRaceDetailsDTO putAdditionalProperty(String key, Object value) {
+  public RealmDetailsDTO putAdditionalProperty(String key, Object value) {
     if (this.additionalProperties == null) {
         this.additionalProperties = new HashMap<String, Object>();
     }
@@ -282,33 +317,37 @@ public class PlayableRaceDetailsDTO {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PlayableRaceDetailsDTO playableRaceDetailsDTO = (PlayableRaceDetailsDTO) o;
-    return Objects.equals(this.id, playableRaceDetailsDTO.id) &&
-        Objects.equals(this.name, playableRaceDetailsDTO.name) &&
-        Objects.equals(this.genderName, playableRaceDetailsDTO.genderName) &&
-        Objects.equals(this.faction, playableRaceDetailsDTO.faction) &&
-        Objects.equals(this.isSelectable, playableRaceDetailsDTO.isSelectable) &&
-        Objects.equals(this.isAlliedRace, playableRaceDetailsDTO.isAlliedRace) &&
-        Objects.equals(this.playableClasses, playableRaceDetailsDTO.playableClasses)&&
-        Objects.equals(this.additionalProperties, playableRaceDetailsDTO.additionalProperties);
+    RealmDetailsDTO realmDetailsDTO = (RealmDetailsDTO) o;
+    return Objects.equals(this.id, realmDetailsDTO.id) &&
+        Objects.equals(this.region, realmDetailsDTO.region) &&
+        Objects.equals(this.name, realmDetailsDTO.name) &&
+        Objects.equals(this.category, realmDetailsDTO.category) &&
+        Objects.equals(this.locale, realmDetailsDTO.locale) &&
+        Objects.equals(this.timezone, realmDetailsDTO.timezone) &&
+        Objects.equals(this.type, realmDetailsDTO.type) &&
+        Objects.equals(this.isTournament, realmDetailsDTO.isTournament) &&
+        Objects.equals(this.slug, realmDetailsDTO.slug)&&
+        Objects.equals(this.additionalProperties, realmDetailsDTO.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, genderName, faction, isSelectable, isAlliedRace, playableClasses, additionalProperties);
+    return Objects.hash(id, region, name, category, locale, timezone, type, isTournament, slug, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PlayableRaceDetailsDTO {\n");
+    sb.append("class RealmDetailsDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    region: ").append(toIndentedString(region)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    genderName: ").append(toIndentedString(genderName)).append("\n");
-    sb.append("    faction: ").append(toIndentedString(faction)).append("\n");
-    sb.append("    isSelectable: ").append(toIndentedString(isSelectable)).append("\n");
-    sb.append("    isAlliedRace: ").append(toIndentedString(isAlliedRace)).append("\n");
-    sb.append("    playableClasses: ").append(toIndentedString(playableClasses)).append("\n");
+    sb.append("    category: ").append(toIndentedString(category)).append("\n");
+    sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
+    sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    isTournament: ").append(toIndentedString(isTournament)).append("\n");
+    sb.append("    slug: ").append(toIndentedString(slug)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -333,76 +372,81 @@ public class PlayableRaceDetailsDTO {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
+    openapiFields.add("region");
     openapiFields.add("name");
-    openapiFields.add("gender_name");
-    openapiFields.add("faction");
-    openapiFields.add("is_selectable");
-    openapiFields.add("is_allied_race");
-    openapiFields.add("playable_classes");
+    openapiFields.add("category");
+    openapiFields.add("locale");
+    openapiFields.add("timezone");
+    openapiFields.add("type");
+    openapiFields.add("is_tournament");
+    openapiFields.add("slug");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
     openapiRequiredFields.add("id");
+    openapiRequiredFields.add("region");
     openapiRequiredFields.add("name");
-    openapiRequiredFields.add("gender_name");
-    openapiRequiredFields.add("faction");
-    openapiRequiredFields.add("is_selectable");
-    openapiRequiredFields.add("is_allied_race");
-    openapiRequiredFields.add("playable_classes");
+    openapiRequiredFields.add("category");
+    openapiRequiredFields.add("locale");
+    openapiRequiredFields.add("timezone");
+    openapiRequiredFields.add("type");
+    openapiRequiredFields.add("is_tournament");
+    openapiRequiredFields.add("slug");
   }
 
  /**
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to PlayableRaceDetailsDTO
+  * @throws IOException if the JSON Element is invalid with respect to RealmDetailsDTO
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PlayableRaceDetailsDTO.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in PlayableRaceDetailsDTO is not found in the empty JSON string", PlayableRaceDetailsDTO.openapiRequiredFields.toString()));
+        if (!RealmDetailsDTO.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in RealmDetailsDTO is not found in the empty JSON string", RealmDetailsDTO.openapiRequiredFields.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PlayableRaceDetailsDTO.openapiRequiredFields) {
+      for (String requiredField : RealmDetailsDTO.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      // validate the required field `region`
+      IndexDataDTO.validateJsonElement(jsonObj.get("region"));
       // validate the required field `name`
       NameDataDTO.validateJsonElement(jsonObj.get("name"));
-      // validate the required field `gender_name`
-      GenderDTO.validateJsonElement(jsonObj.get("gender_name"));
-      // validate the required field `faction`
-      FactionPlayableRaceDTO.validateJsonElement(jsonObj.get("faction"));
-      // ensure the json data is an array
-      if (!jsonObj.get("playable_classes").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `playable_classes` to be an array in the JSON string but got `%s`", jsonObj.get("playable_classes").toString()));
+      // validate the required field `category`
+      NameDataDTO.validateJsonElement(jsonObj.get("category"));
+      if (!jsonObj.get("locale").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `locale` to be a primitive type in the JSON string but got `%s`", jsonObj.get("locale").toString()));
       }
-
-      JsonArray jsonArrayplayableClasses = jsonObj.getAsJsonArray("playable_classes");
-      // validate the required field `playable_classes` (array)
-      for (int i = 0; i < jsonArrayplayableClasses.size(); i++) {
-        IndexDataDTO.validateJsonElement(jsonArrayplayableClasses.get(i));
-      };
+      if (!jsonObj.get("timezone").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `timezone` to be a primitive type in the JSON string but got `%s`", jsonObj.get("timezone").toString()));
+      }
+      // validate the required field `type`
+      RealmTypeDTO.validateJsonElement(jsonObj.get("type"));
+      if (!jsonObj.get("slug").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `slug` to be a primitive type in the JSON string but got `%s`", jsonObj.get("slug").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PlayableRaceDetailsDTO.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PlayableRaceDetailsDTO' and its subtypes
+       if (!RealmDetailsDTO.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'RealmDetailsDTO' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PlayableRaceDetailsDTO> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PlayableRaceDetailsDTO.class));
+       final TypeAdapter<RealmDetailsDTO> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(RealmDetailsDTO.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PlayableRaceDetailsDTO>() {
+       return (TypeAdapter<T>) new TypeAdapter<RealmDetailsDTO>() {
            @Override
-           public void write(JsonWriter out, PlayableRaceDetailsDTO value) throws IOException {
+           public void write(JsonWriter out, RealmDetailsDTO value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              obj.remove("additionalProperties");
              // serialize additional properties
@@ -425,12 +469,12 @@ public class PlayableRaceDetailsDTO {
            }
 
            @Override
-           public PlayableRaceDetailsDTO read(JsonReader in) throws IOException {
+           public RealmDetailsDTO read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              JsonObject jsonObj = jsonElement.getAsJsonObject();
              // store additional fields in the deserialized instance
-             PlayableRaceDetailsDTO instance = thisAdapter.fromJsonTree(jsonObj);
+             RealmDetailsDTO instance = thisAdapter.fromJsonTree(jsonObj);
              for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                if (!openapiFields.contains(entry.getKey())) {
                  if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -457,18 +501,18 @@ public class PlayableRaceDetailsDTO {
   }
 
  /**
-  * Create an instance of PlayableRaceDetailsDTO given an JSON string
+  * Create an instance of RealmDetailsDTO given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of PlayableRaceDetailsDTO
-  * @throws IOException if the JSON string is invalid with respect to PlayableRaceDetailsDTO
+  * @return An instance of RealmDetailsDTO
+  * @throws IOException if the JSON string is invalid with respect to RealmDetailsDTO
   */
-  public static PlayableRaceDetailsDTO fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PlayableRaceDetailsDTO.class);
+  public static RealmDetailsDTO fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, RealmDetailsDTO.class);
   }
 
  /**
-  * Convert an instance of PlayableRaceDetailsDTO to an JSON string
+  * Convert an instance of RealmDetailsDTO to an JSON string
   *
   * @return JSON string
   */

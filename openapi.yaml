@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Blizzard API
-  version: 0.2.1
+  version: 0.3.0
   description: An OpenAPI specification for Blizzard API
 servers:
   - url: https://{region}.api.blizzard.com
@@ -15,16 +15,17 @@ servers:
           - kr
           - tw
 tags:
-  - name: Playable Race API
-  - name: Playable Class API
-  - name: Playable Specialization API
+  - name: Game Data Playable Race
+  - name: Game Data Playable Class
+  - name: Game Data Playable Specialization
+  - name: Game Data Realm
 security:
   - accessToken: []
 paths:
   /data/wow/playable-class/index:
     get:
       tags:
-        - Playable Class API
+        - Game Data Playable Race
       summary: Returns an index of playable races.
       operationId: getPlayableClassesIndex
       parameters:
@@ -50,7 +51,7 @@ paths:
   /data/wow/playable-class/{classId}:
     get:
       tags:
-        - Playable Class API
+        - Game Data Playable Race
       summary: Returns a playable class by ID.
       operationId: getPlayableClass
       parameters:
@@ -81,7 +82,7 @@ paths:
   /data/wow/playable-race/index:
     get:
       tags:
-        - Playable Race API
+        - Game Data Playable Class
       summary: Returns an index of playable races.
       operationId: getPlayableRacesIndex
       parameters:
@@ -107,7 +108,7 @@ paths:
   /data/wow/playable-race/{playableRaceId}:
     get:
       tags:
-        - Playable Race API
+        - Game Data Playable Class
       summary: Returns a playable race by ID.
       operationId: getPlayableRace
       parameters:
@@ -138,7 +139,7 @@ paths:
   /data/wow/playable-specialization/index:
     get:
       tags:
-        - Playable Specialization API
+        - Game Data Playable Specialization
       summary: Returns an index of playable specializations.
       operationId: getPlayableSpecializationsIndex
       parameters:
@@ -164,7 +165,7 @@ paths:
   /data/wow/playable-specialization/{specId}:
     get:
       tags:
-        - Playable Specialization API
+        - Game Data Playable Specialization
       summary: Returns a playable race by ID.
       operationId: getPlayableSpecialization
       parameters:
@@ -186,6 +187,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlayableSpecializationDetailsDTO'
+        4XX:
+          description: Http 4XX
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+  /data/wow/realm/index:
+    get:
+      tags:
+        - Game Data Realm
+      summary: Returns an index of realms.
+      operationId: getRealmsIndex
+      parameters:
+        - in: query
+          name: namespace
+          schema:
+            type: string
+            default: dynamic-eu
+          required: true
+      responses:
+        '200':
+          description: Http 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealmsIndexDTO'
+        4XX:
+          description: Http 4XX
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+  /data/wow/realm/{realmSlug}:
+    get:
+      tags:
+        - Game Data Realm
+      summary: Returns a single realm by slug or ID.
+      operationId: getRealm
+      parameters:
+        - in: query
+          name: namespace
+          schema:
+            type: string
+            default: dynamic-eu
+          required: true
+        - in: path
+          name: realmSlug
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Http 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealmDetailsDTO'
         4XX:
           description: Http 4XX
           content:
@@ -261,6 +319,19 @@ components:
       required:
         - name
         - id
+    IndexRealmDataDTO:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        slug:
+          type: string
+        id:
+          type: integer
+      required:
+        - name
+        - slug
+        - id
     IndexDataWithoutIdDTO:
       type: object
       properties:
@@ -310,6 +381,15 @@ components:
       required:
         - character_specializations
         - pet_specializations
+    RealmsIndexDTO:
+      type: object
+      properties:
+        realms:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexRealmDataDTO'
+      required:
+        - realms
     FactionPlayableRaceDTO:
       type: object
       properties:
@@ -435,3 +515,44 @@ components:
         - pvp_talents
         - power_type
         - primary_stat_type
+    RealmDetailsDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        region:
+          $ref: '#/components/schemas/IndexDataDTO'
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        category:
+          $ref: '#/components/schemas/NameDataDTO'
+        locale:
+          type: string
+        timezone:
+          type: string
+        type:
+          $ref: '#/components/schemas/RealmTypeDTO'
+        is_tournament:
+          type: boolean
+        slug:
+          type: string
+      required:
+        - id
+        - region
+        - name
+        - category
+        - locale
+        - timezone
+        - type
+        - is_tournament
+        - slug
+    RealmTypeDTO:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        type:
+          type: string
+      required:
+        - name
+        - type

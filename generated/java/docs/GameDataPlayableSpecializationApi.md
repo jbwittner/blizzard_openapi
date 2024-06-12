@@ -1,18 +1,18 @@
-# PlayableClassApiApi
+# GameDataPlayableSpecializationApi
 
 All URIs are relative to *https://eu.api.blizzard.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getPlayableClass**](PlayableClassApiApi.md#getPlayableClass) | **GET** /data/wow/playable-class/{classId} | Returns a playable class by ID. |
-| [**getPlayableClassesIndex**](PlayableClassApiApi.md#getPlayableClassesIndex) | **GET** /data/wow/playable-class/index | Returns an index of playable races. |
+| [**getPlayableSpecialization**](GameDataPlayableSpecializationApi.md#getPlayableSpecialization) | **GET** /data/wow/playable-specialization/{specId} | Returns a playable race by ID. |
+| [**getPlayableSpecializationsIndex**](GameDataPlayableSpecializationApi.md#getPlayableSpecializationsIndex) | **GET** /data/wow/playable-specialization/index | Returns an index of playable specializations. |
 
 
-<a id="getPlayableClass"></a>
-# **getPlayableClass**
-> PlayableClassDetailsDTO getPlayableClass(namespace, classId)
+<a id="getPlayableSpecialization"></a>
+# **getPlayableSpecialization**
+> PlayableSpecializationDetailsDTO getPlayableSpecialization(namespace, specId)
 
-Returns a playable class by ID.
+Returns a playable race by ID.
 
 ### Example
 ```java
@@ -22,7 +22,7 @@ import com.blizzardapi.ApiException;
 import com.blizzardapi.Configuration;
 import com.blizzardapi.auth.*;
 import com.blizzardapi.models.*;
-import com.blizzardapi.openapi.PlayableClassApiApi;
+import com.blizzardapi.openapi.GameDataPlayableSpecializationApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -33,14 +33,14 @@ public class Example {
     HttpBearerAuth accessToken = (HttpBearerAuth) defaultClient.getAuthentication("accessToken");
     accessToken.setBearerToken("BEARER TOKEN");
 
-    PlayableClassApiApi apiInstance = new PlayableClassApiApi(defaultClient);
+    GameDataPlayableSpecializationApi apiInstance = new GameDataPlayableSpecializationApi(defaultClient);
     String namespace = "static-eu"; // String | 
-    Integer classId = 56; // Integer | 
+    Integer specId = 56; // Integer | 
     try {
-      PlayableClassDetailsDTO result = apiInstance.getPlayableClass(namespace, classId);
+      PlayableSpecializationDetailsDTO result = apiInstance.getPlayableSpecialization(namespace, specId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling PlayableClassApiApi#getPlayableClass");
+      System.err.println("Exception when calling GameDataPlayableSpecializationApi#getPlayableSpecialization");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -55,11 +55,11 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **namespace** | **String**|  | [default to static-eu] |
-| **classId** | **Integer**|  | |
+| **specId** | **Integer**|  | |
 
 ### Return type
 
-[**PlayableClassDetailsDTO**](PlayableClassDetailsDTO.md)
+[**PlayableSpecializationDetailsDTO**](PlayableSpecializationDetailsDTO.md)
 
 ### Authorization
 
@@ -76,11 +76,11 @@ public class Example {
 | **200** | Http 200 |  -  |
 | **4XX** | Http 4XX |  -  |
 
-<a id="getPlayableClassesIndex"></a>
-# **getPlayableClassesIndex**
-> PlayableClassesIndexDTO getPlayableClassesIndex(namespace)
+<a id="getPlayableSpecializationsIndex"></a>
+# **getPlayableSpecializationsIndex**
+> PlayableSpecializationIndexDTO getPlayableSpecializationsIndex(namespace)
 
-Returns an index of playable races.
+Returns an index of playable specializations.
 
 ### Example
 ```java
@@ -90,7 +90,7 @@ import com.blizzardapi.ApiException;
 import com.blizzardapi.Configuration;
 import com.blizzardapi.auth.*;
 import com.blizzardapi.models.*;
-import com.blizzardapi.openapi.PlayableClassApiApi;
+import com.blizzardapi.openapi.GameDataPlayableSpecializationApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -101,13 +101,13 @@ public class Example {
     HttpBearerAuth accessToken = (HttpBearerAuth) defaultClient.getAuthentication("accessToken");
     accessToken.setBearerToken("BEARER TOKEN");
 
-    PlayableClassApiApi apiInstance = new PlayableClassApiApi(defaultClient);
+    GameDataPlayableSpecializationApi apiInstance = new GameDataPlayableSpecializationApi(defaultClient);
     String namespace = "static-eu"; // String | 
     try {
-      PlayableClassesIndexDTO result = apiInstance.getPlayableClassesIndex(namespace);
+      PlayableSpecializationIndexDTO result = apiInstance.getPlayableSpecializationsIndex(namespace);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling PlayableClassApiApi#getPlayableClassesIndex");
+      System.err.println("Exception when calling GameDataPlayableSpecializationApi#getPlayableSpecializationsIndex");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -125,7 +125,7 @@ public class Example {
 
 ### Return type
 
-[**PlayableClassesIndexDTO**](PlayableClassesIndexDTO.md)
+[**PlayableSpecializationIndexDTO**](PlayableSpecializationIndexDTO.md)
 
 ### Authorization
 

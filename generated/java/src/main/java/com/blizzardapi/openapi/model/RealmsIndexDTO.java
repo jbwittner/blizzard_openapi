@@ -14,7 +14,7 @@
 package com.blizzardapi.openapi.model;
 
 import java.util.Objects;
-import com.blizzardapi.openapi.model.IndexDataDTO;
+import com.blizzardapi.openapi.model.IndexRealmDataDTO;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -50,41 +50,41 @@ import java.util.Set;
 import com.blizzardapi.JSON;
 
 /**
- * PlayableRacesIndexDTO
+ * RealmsIndexDTO
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class PlayableRacesIndexDTO {
-  public static final String SERIALIZED_NAME_RACES = "races";
-  @SerializedName(SERIALIZED_NAME_RACES)
-  private List<IndexDataDTO> races = new ArrayList<>();
+public class RealmsIndexDTO {
+  public static final String SERIALIZED_NAME_CLASSES = "classes";
+  @SerializedName(SERIALIZED_NAME_CLASSES)
+  private List<IndexRealmDataDTO> classes = new ArrayList<>();
 
-  public PlayableRacesIndexDTO() {
+  public RealmsIndexDTO() {
   }
 
-  public PlayableRacesIndexDTO races(List<IndexDataDTO> races) {
-    this.races = races;
+  public RealmsIndexDTO classes(List<IndexRealmDataDTO> classes) {
+    this.classes = classes;
     return this;
   }
 
-  public PlayableRacesIndexDTO addRacesItem(IndexDataDTO racesItem) {
-    if (this.races == null) {
-      this.races = new ArrayList<>();
+  public RealmsIndexDTO addClassesItem(IndexRealmDataDTO classesItem) {
+    if (this.classes == null) {
+      this.classes = new ArrayList<>();
     }
-    this.races.add(racesItem);
+    this.classes.add(classesItem);
     return this;
   }
 
    /**
-   * Get races
-   * @return races
+   * Get classes
+   * @return classes
   **/
   @javax.annotation.Nonnull
-  public List<IndexDataDTO> getRaces() {
-    return races;
+  public List<IndexRealmDataDTO> getClasses() {
+    return classes;
   }
 
-  public void setRaces(List<IndexDataDTO> races) {
-    this.races = races;
+  public void setClasses(List<IndexRealmDataDTO> classes) {
+    this.classes = classes;
   }
 
   /**
@@ -100,9 +100,9 @@ public class PlayableRacesIndexDTO {
    *
    * @param key name of the property
    * @param value value of the property
-   * @return the PlayableRacesIndexDTO instance itself
+   * @return the RealmsIndexDTO instance itself
    */
-  public PlayableRacesIndexDTO putAdditionalProperty(String key, Object value) {
+  public RealmsIndexDTO putAdditionalProperty(String key, Object value) {
     if (this.additionalProperties == null) {
         this.additionalProperties = new HashMap<String, Object>();
     }
@@ -141,21 +141,21 @@ public class PlayableRacesIndexDTO {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PlayableRacesIndexDTO playableRacesIndexDTO = (PlayableRacesIndexDTO) o;
-    return Objects.equals(this.races, playableRacesIndexDTO.races)&&
-        Objects.equals(this.additionalProperties, playableRacesIndexDTO.additionalProperties);
+    RealmsIndexDTO realmsIndexDTO = (RealmsIndexDTO) o;
+    return Objects.equals(this.classes, realmsIndexDTO.classes)&&
+        Objects.equals(this.additionalProperties, realmsIndexDTO.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(races, additionalProperties);
+    return Objects.hash(classes, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PlayableRacesIndexDTO {\n");
-    sb.append("    races: ").append(toIndentedString(races)).append("\n");
+    sb.append("class RealmsIndexDTO {\n");
+    sb.append("    classes: ").append(toIndentedString(classes)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -179,42 +179,42 @@ public class PlayableRacesIndexDTO {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("races");
+    openapiFields.add("classes");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("races");
+    openapiRequiredFields.add("classes");
   }
 
  /**
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to PlayableRacesIndexDTO
+  * @throws IOException if the JSON Element is invalid with respect to RealmsIndexDTO
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PlayableRacesIndexDTO.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in PlayableRacesIndexDTO is not found in the empty JSON string", PlayableRacesIndexDTO.openapiRequiredFields.toString()));
+        if (!RealmsIndexDTO.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in RealmsIndexDTO is not found in the empty JSON string", RealmsIndexDTO.openapiRequiredFields.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PlayableRacesIndexDTO.openapiRequiredFields) {
+      for (String requiredField : RealmsIndexDTO.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // ensure the json data is an array
-      if (!jsonObj.get("races").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `races` to be an array in the JSON string but got `%s`", jsonObj.get("races").toString()));
+      if (!jsonObj.get("classes").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `classes` to be an array in the JSON string but got `%s`", jsonObj.get("classes").toString()));
       }
 
-      JsonArray jsonArrayraces = jsonObj.getAsJsonArray("races");
-      // validate the required field `races` (array)
-      for (int i = 0; i < jsonArrayraces.size(); i++) {
-        IndexDataDTO.validateJsonElement(jsonArrayraces.get(i));
+      JsonArray jsonArrayclasses = jsonObj.getAsJsonArray("classes");
+      // validate the required field `classes` (array)
+      for (int i = 0; i < jsonArrayclasses.size(); i++) {
+        IndexRealmDataDTO.validateJsonElement(jsonArrayclasses.get(i));
       };
   }
 
@@ -222,16 +222,16 @@ public class PlayableRacesIndexDTO {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PlayableRacesIndexDTO.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PlayableRacesIndexDTO' and its subtypes
+       if (!RealmsIndexDTO.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'RealmsIndexDTO' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PlayableRacesIndexDTO> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PlayableRacesIndexDTO.class));
+       final TypeAdapter<RealmsIndexDTO> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(RealmsIndexDTO.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PlayableRacesIndexDTO>() {
+       return (TypeAdapter<T>) new TypeAdapter<RealmsIndexDTO>() {
            @Override
-           public void write(JsonWriter out, PlayableRacesIndexDTO value) throws IOException {
+           public void write(JsonWriter out, RealmsIndexDTO value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              obj.remove("additionalProperties");
              // serialize additional properties
@@ -254,12 +254,12 @@ public class PlayableRacesIndexDTO {
            }
 
            @Override
-           public PlayableRacesIndexDTO read(JsonReader in) throws IOException {
+           public RealmsIndexDTO read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              JsonObject jsonObj = jsonElement.getAsJsonObject();
              // store additional fields in the deserialized instance
-             PlayableRacesIndexDTO instance = thisAdapter.fromJsonTree(jsonObj);
+             RealmsIndexDTO instance = thisAdapter.fromJsonTree(jsonObj);
              for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
                if (!openapiFields.contains(entry.getKey())) {
                  if (entry.getValue().isJsonPrimitive()) { // primitive type
@@ -286,18 +286,18 @@ public class PlayableRacesIndexDTO {
   }
 
  /**
-  * Create an instance of PlayableRacesIndexDTO given an JSON string
+  * Create an instance of RealmsIndexDTO given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of PlayableRacesIndexDTO
-  * @throws IOException if the JSON string is invalid with respect to PlayableRacesIndexDTO
+  * @return An instance of RealmsIndexDTO
+  * @throws IOException if the JSON string is invalid with respect to RealmsIndexDTO
   */
-  public static PlayableRacesIndexDTO fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PlayableRacesIndexDTO.class);
+  public static RealmsIndexDTO fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, RealmsIndexDTO.class);
   }
 
  /**
-  * Convert an instance of PlayableRacesIndexDTO to an JSON string
+  * Convert an instance of RealmsIndexDTO to an JSON string
   *
   * @return JSON string
   */

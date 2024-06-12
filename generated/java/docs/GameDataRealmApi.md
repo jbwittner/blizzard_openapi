@@ -1,18 +1,18 @@
-# PlayableSpecializationApiApi
+# GameDataRealmApi
 
 All URIs are relative to *https://eu.api.blizzard.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getPlayableSpecialization**](PlayableSpecializationApiApi.md#getPlayableSpecialization) | **GET** /data/wow/playable-specialization/{specId} | Returns a playable race by ID. |
-| [**getPlayableSpecializationsIndex**](PlayableSpecializationApiApi.md#getPlayableSpecializationsIndex) | **GET** /data/wow/playable-specialization/index | Returns an index of playable specializations. |
+| [**getRealm**](GameDataRealmApi.md#getRealm) | **GET** /data/wow/realm/{realmSlug} | Returns a single realm by slug or ID. |
+| [**getRealmsIndex**](GameDataRealmApi.md#getRealmsIndex) | **GET** /data/wow/realm/index | Returns an index of realms. |
 
 
-<a id="getPlayableSpecialization"></a>
-# **getPlayableSpecialization**
-> PlayableSpecializationDetailsDTO getPlayableSpecialization(namespace, specId)
+<a id="getRealm"></a>
+# **getRealm**
+> RealmDetailsDTO getRealm(namespace, realmSlug)
 
-Returns a playable race by ID.
+Returns a single realm by slug or ID.
 
 ### Example
 ```java
@@ -22,7 +22,7 @@ import com.blizzardapi.ApiException;
 import com.blizzardapi.Configuration;
 import com.blizzardapi.auth.*;
 import com.blizzardapi.models.*;
-import com.blizzardapi.openapi.PlayableSpecializationApiApi;
+import com.blizzardapi.openapi.GameDataRealmApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -33,14 +33,14 @@ public class Example {
     HttpBearerAuth accessToken = (HttpBearerAuth) defaultClient.getAuthentication("accessToken");
     accessToken.setBearerToken("BEARER TOKEN");
 
-    PlayableSpecializationApiApi apiInstance = new PlayableSpecializationApiApi(defaultClient);
-    String namespace = "static-eu"; // String | 
-    Integer specId = 56; // Integer | 
+    GameDataRealmApi apiInstance = new GameDataRealmApi(defaultClient);
+    String namespace = "dynamic-eu"; // String | 
+    String realmSlug = "realmSlug_example"; // String | 
     try {
-      PlayableSpecializationDetailsDTO result = apiInstance.getPlayableSpecialization(namespace, specId);
+      RealmDetailsDTO result = apiInstance.getRealm(namespace, realmSlug);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling PlayableSpecializationApiApi#getPlayableSpecialization");
+      System.err.println("Exception when calling GameDataRealmApi#getRealm");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -54,12 +54,12 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **namespace** | **String**|  | [default to static-eu] |
-| **specId** | **Integer**|  | |
+| **namespace** | **String**|  | [default to dynamic-eu] |
+| **realmSlug** | **String**|  | |
 
 ### Return type
 
-[**PlayableSpecializationDetailsDTO**](PlayableSpecializationDetailsDTO.md)
+[**RealmDetailsDTO**](RealmDetailsDTO.md)
 
 ### Authorization
 
@@ -76,11 +76,11 @@ public class Example {
 | **200** | Http 200 |  -  |
 | **4XX** | Http 4XX |  -  |
 
-<a id="getPlayableSpecializationsIndex"></a>
-# **getPlayableSpecializationsIndex**
-> PlayableSpecializationIndexDTO getPlayableSpecializationsIndex(namespace)
+<a id="getRealmsIndex"></a>
+# **getRealmsIndex**
+> RealmsIndexDTO getRealmsIndex(namespace)
 
-Returns an index of playable specializations.
+Returns an index of realms.
 
 ### Example
 ```java
@@ -90,7 +90,7 @@ import com.blizzardapi.ApiException;
 import com.blizzardapi.Configuration;
 import com.blizzardapi.auth.*;
 import com.blizzardapi.models.*;
-import com.blizzardapi.openapi.PlayableSpecializationApiApi;
+import com.blizzardapi.openapi.GameDataRealmApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -101,13 +101,13 @@ public class Example {
     HttpBearerAuth accessToken = (HttpBearerAuth) defaultClient.getAuthentication("accessToken");
     accessToken.setBearerToken("BEARER TOKEN");
 
-    PlayableSpecializationApiApi apiInstance = new PlayableSpecializationApiApi(defaultClient);
-    String namespace = "static-eu"; // String | 
+    GameDataRealmApi apiInstance = new GameDataRealmApi(defaultClient);
+    String namespace = "dynamic-eu"; // String | 
     try {
-      PlayableSpecializationIndexDTO result = apiInstance.getPlayableSpecializationsIndex(namespace);
+      RealmsIndexDTO result = apiInstance.getRealmsIndex(namespace);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling PlayableSpecializationApiApi#getPlayableSpecializationsIndex");
+      System.err.println("Exception when calling GameDataRealmApi#getRealmsIndex");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -121,11 +121,11 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **namespace** | **String**|  | [default to static-eu] |
+| **namespace** | **String**|  | [default to dynamic-eu] |
 
 ### Return type
 
-[**PlayableSpecializationIndexDTO**](PlayableSpecializationIndexDTO.md)
+[**RealmsIndexDTO**](RealmsIndexDTO.md)
 
 ### Authorization
 
