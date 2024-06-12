@@ -17,9 +17,9 @@ servers:
 security:
 - accessToken: []
 tags:
-- name: Playable Race API
-- name: Playable Class API
-- name: Playable Specialization API
+- name: Game Data Playable Class
+- name: Game Data Playable Race
+- name: Game Data Playable Specialization
 paths:
   /data/wow/playable-class/index:
     get:
@@ -48,7 +48,7 @@ paths:
           description: Http 4XX
       summary: Returns an index of playable races.
       tags:
-      - Playable Class API
+      - Game Data Playable Race
       x-accepts: application/json
   /data/wow/playable-class/{classId}:
     get:
@@ -84,7 +84,7 @@ paths:
           description: Http 4XX
       summary: Returns a playable class by ID.
       tags:
-      - Playable Class API
+      - Game Data Playable Race
       x-accepts: application/json
   /data/wow/playable-race/index:
     get:
@@ -113,7 +113,7 @@ paths:
           description: Http 4XX
       summary: Returns an index of playable races.
       tags:
-      - Playable Race API
+      - Game Data Playable Class
       x-accepts: application/json
   /data/wow/playable-race/{playableRaceId}:
     get:
@@ -149,7 +149,7 @@ paths:
           description: Http 4XX
       summary: Returns a playable race by ID.
       tags:
-      - Playable Race API
+      - Game Data Playable Class
       x-accepts: application/json
   /data/wow/playable-specialization/index:
     get:
@@ -178,7 +178,7 @@ paths:
           description: Http 4XX
       summary: Returns an index of playable specializations.
       tags:
-      - Playable Specialization API
+      - Game Data Playable Specialization
       x-accepts: application/json
   /data/wow/playable-specialization/{specId}:
     get:
@@ -214,7 +214,7 @@ paths:
           description: Http 4XX
       summary: Returns a playable race by ID.
       tags:
-      - Playable Specialization API
+      - Game Data Playable Specialization
       x-accepts: application/json
 components:
   schemas:
