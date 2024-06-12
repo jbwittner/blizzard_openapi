@@ -384,12 +384,12 @@ components:
     RealmsIndexDTO:
       type: object
       properties:
-        classes:
+        realms:
           type: array
           items:
             $ref: '#/components/schemas/IndexRealmDataDTO'
       required:
-        - classes
+        - realms
     FactionPlayableRaceDTO:
       type: object
       properties:
