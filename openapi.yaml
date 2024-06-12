@@ -15,8 +15,8 @@ servers:
           - kr
           - tw
 tags:
-  - name: Game Data Playable Race
   - name: Game Data Playable Class
+  - name: Game Data Playable Race
   - name: Game Data Playable Specialization
   - name: Game Data Realm
 security:
@@ -25,8 +25,8 @@ paths:
   /data/wow/playable-class/index:
     get:
       tags:
-        - Game Data Playable Race
-      summary: Returns an index of playable races.
+        - Game Data Playable Class
+      summary: Returns an index of playable class.
       operationId: getPlayableClassesIndex
       parameters:
         - in: query
@@ -51,7 +51,7 @@ paths:
   /data/wow/playable-class/{classId}:
     get:
       tags:
-        - Game Data Playable Race
+        - Game Data Playable Class
       summary: Returns a playable class by ID.
       operationId: getPlayableClass
       parameters:
@@ -82,7 +82,7 @@ paths:
   /data/wow/playable-race/index:
     get:
       tags:
-        - Game Data Playable Class
+        - Game Data Playable Race
       summary: Returns an index of playable races.
       operationId: getPlayableRacesIndex
       parameters:
@@ -108,7 +108,7 @@ paths:
   /data/wow/playable-race/{playableRaceId}:
     get:
       tags:
-        - Game Data Playable Class
+        - Game Data Playable Race
       summary: Returns a playable race by ID.
       operationId: getPlayableRace
       parameters:

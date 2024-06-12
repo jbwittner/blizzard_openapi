@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**classes** | [**List&lt;IndexRealmDataDTO&gt;**](IndexRealmDataDTO.md) |  |  |
+|**realms** | [**List&lt;IndexRealmDataDTO&gt;**](IndexRealmDataDTO.md) |  |  |
 
 
 

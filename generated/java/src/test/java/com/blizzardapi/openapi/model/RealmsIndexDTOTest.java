@@ -41,11 +41,11 @@ public class RealmsIndexDTOTest {
     }
 
     /**
-     * Test the property 'classes'
+     * Test the property 'realms'
      */
     @Test
-    public void classesTest() {
-        // TODO: test classes
+    public void realmsTest() {
+        // TODO: test realms
     }
 
 }

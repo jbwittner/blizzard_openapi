@@ -28,8 +28,8 @@ import java.io.IOException;
 
 
 import com.blizzardapi.openapi.model.ApiErrorDTO;
-import com.blizzardapi.openapi.model.PlayableClassDetailsDTO;
-import com.blizzardapi.openapi.model.PlayableClassesIndexDTO;
+import com.blizzardapi.openapi.model.PlayableRaceDetailsDTO;
+import com.blizzardapi.openapi.model.PlayableRacesIndexDTO;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -75,9 +75,9 @@ public class GameDataPlayableRaceApi {
     }
 
     /**
-     * Build call for getPlayableClass
+     * Build call for getPlayableRace
      * @param namespace  (required)
-     * @param classId  (required)
+     * @param playableRaceId  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -88,7 +88,7 @@ public class GameDataPlayableRaceApi {
         <tr><td> 4XX </td><td> Http 4XX </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPlayableClassCall(String namespace, Integer classId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getPlayableRaceCall(String namespace, Integer playableRaceId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -105,8 +105,8 @@ public class GameDataPlayableRaceApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/data/wow/playable-class/{classId}"
-            .replace("{" + "classId" + "}", localVarApiClient.escapeString(classId.toString()));
+        String localVarPath = "/data/wow/playable-race/{playableRaceId}"
+            .replace("{" + "playableRaceId" + "}", localVarApiClient.escapeString(playableRaceId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -138,27 +138,27 @@ public class GameDataPlayableRaceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getPlayableClassValidateBeforeCall(String namespace, Integer classId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getPlayableRaceValidateBeforeCall(String namespace, Integer playableRaceId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'namespace' is set
         if (namespace == null) {
-            throw new ApiException("Missing the required parameter 'namespace' when calling getPlayableClass(Async)");
+            throw new ApiException("Missing the required parameter 'namespace' when calling getPlayableRace(Async)");
         }
 
-        // verify the required parameter 'classId' is set
-        if (classId == null) {
-            throw new ApiException("Missing the required parameter 'classId' when calling getPlayableClass(Async)");
+        // verify the required parameter 'playableRaceId' is set
+        if (playableRaceId == null) {
+            throw new ApiException("Missing the required parameter 'playableRaceId' when calling getPlayableRace(Async)");
         }
 
-        return getPlayableClassCall(namespace, classId, _callback);
+        return getPlayableRaceCall(namespace, playableRaceId, _callback);
 
     }
 
     /**
-     * Returns a playable class by ID.
+     * Returns a playable race by ID.
      * 
      * @param namespace  (required)
-     * @param classId  (required)
-     * @return PlayableClassDetailsDTO
+     * @param playableRaceId  (required)
+     * @return PlayableRaceDetailsDTO
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -167,17 +167,17 @@ public class GameDataPlayableRaceApi {
         <tr><td> 4XX </td><td> Http 4XX </td><td>  -  </td></tr>
      </table>
      */
-    public PlayableClassDetailsDTO getPlayableClass(String namespace, Integer classId) throws ApiException {
-        ApiResponse<PlayableClassDetailsDTO> localVarResp = getPlayableClassWithHttpInfo(namespace, classId);
+    public PlayableRaceDetailsDTO getPlayableRace(String namespace, Integer playableRaceId) throws ApiException {
+        ApiResponse<PlayableRaceDetailsDTO> localVarResp = getPlayableRaceWithHttpInfo(namespace, playableRaceId);
         return localVarResp.getData();
     }
 
     /**
-     * Returns a playable class by ID.
+     * Returns a playable race by ID.
      * 
      * @param namespace  (required)
-     * @param classId  (required)
-     * @return ApiResponse&lt;PlayableClassDetailsDTO&gt;
+     * @param playableRaceId  (required)
+     * @return ApiResponse&lt;PlayableRaceDetailsDTO&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -186,17 +186,17 @@ public class GameDataPlayableRaceApi {
         <tr><td> 4XX </td><td> Http 4XX </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PlayableClassDetailsDTO> getPlayableClassWithHttpInfo(String namespace, Integer classId) throws ApiException {
-        okhttp3.Call localVarCall = getPlayableClassValidateBeforeCall(namespace, classId, null);
-        Type localVarReturnType = new TypeToken<PlayableClassDetailsDTO>(){}.getType();
+    public ApiResponse<PlayableRaceDetailsDTO> getPlayableRaceWithHttpInfo(String namespace, Integer playableRaceId) throws ApiException {
+        okhttp3.Call localVarCall = getPlayableRaceValidateBeforeCall(namespace, playableRaceId, null);
+        Type localVarReturnType = new TypeToken<PlayableRaceDetailsDTO>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Returns a playable class by ID. (asynchronously)
+     * Returns a playable race by ID. (asynchronously)
      * 
      * @param namespace  (required)
-     * @param classId  (required)
+     * @param playableRaceId  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -207,15 +207,15 @@ public class GameDataPlayableRaceApi {
         <tr><td> 4XX </td><td> Http 4XX </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPlayableClassAsync(String namespace, Integer classId, final ApiCallback<PlayableClassDetailsDTO> _callback) throws ApiException {
+    public okhttp3.Call getPlayableRaceAsync(String namespace, Integer playableRaceId, final ApiCallback<PlayableRaceDetailsDTO> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getPlayableClassValidateBeforeCall(namespace, classId, _callback);
-        Type localVarReturnType = new TypeToken<PlayableClassDetailsDTO>(){}.getType();
+        okhttp3.Call localVarCall = getPlayableRaceValidateBeforeCall(namespace, playableRaceId, _callback);
+        Type localVarReturnType = new TypeToken<PlayableRaceDetailsDTO>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for getPlayableClassesIndex
+     * Build call for getPlayableRacesIndex
      * @param namespace  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -227,7 +227,7 @@ public class GameDataPlayableRaceApi {
         <tr><td> 4XX </td><td> Http 4XX </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPlayableClassesIndexCall(String namespace, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getPlayableRacesIndexCall(String namespace, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -244,7 +244,7 @@ public class GameDataPlayableRaceApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/data/wow/playable-class/index";
+        String localVarPath = "/data/wow/playable-race/index";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -276,13 +276,13 @@ public class GameDataPlayableRaceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getPlayableClassesIndexValidateBeforeCall(String namespace, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getPlayableRacesIndexValidateBeforeCall(String namespace, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'namespace' is set
         if (namespace == null) {
-            throw new ApiException("Missing the required parameter 'namespace' when calling getPlayableClassesIndex(Async)");
+            throw new ApiException("Missing the required parameter 'namespace' when calling getPlayableRacesIndex(Async)");
         }
 
-        return getPlayableClassesIndexCall(namespace, _callback);
+        return getPlayableRacesIndexCall(namespace, _callback);
 
     }
 
@@ -290,7 +290,7 @@ public class GameDataPlayableRaceApi {
      * Returns an index of playable races.
      * 
      * @param namespace  (required)
-     * @return PlayableClassesIndexDTO
+     * @return PlayableRacesIndexDTO
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -299,8 +299,8 @@ public class GameDataPlayableRaceApi {
         <tr><td> 4XX </td><td> Http 4XX </td><td>  -  </td></tr>
      </table>
      */
-    public PlayableClassesIndexDTO getPlayableClassesIndex(String namespace) throws ApiException {
-        ApiResponse<PlayableClassesIndexDTO> localVarResp = getPlayableClassesIndexWithHttpInfo(namespace);
+    public PlayableRacesIndexDTO getPlayableRacesIndex(String namespace) throws ApiException {
+        ApiResponse<PlayableRacesIndexDTO> localVarResp = getPlayableRacesIndexWithHttpInfo(namespace);
         return localVarResp.getData();
     }
 
@@ -308,7 +308,7 @@ public class GameDataPlayableRaceApi {
      * Returns an index of playable races.
      * 
      * @param namespace  (required)
-     * @return ApiResponse&lt;PlayableClassesIndexDTO&gt;
+     * @return ApiResponse&lt;PlayableRacesIndexDTO&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -317,9 +317,9 @@ public class GameDataPlayableRaceApi {
         <tr><td> 4XX </td><td> Http 4XX </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PlayableClassesIndexDTO> getPlayableClassesIndexWithHttpInfo(String namespace) throws ApiException {
-        okhttp3.Call localVarCall = getPlayableClassesIndexValidateBeforeCall(namespace, null);
-        Type localVarReturnType = new TypeToken<PlayableClassesIndexDTO>(){}.getType();
+    public ApiResponse<PlayableRacesIndexDTO> getPlayableRacesIndexWithHttpInfo(String namespace) throws ApiException {
+        okhttp3.Call localVarCall = getPlayableRacesIndexValidateBeforeCall(namespace, null);
+        Type localVarReturnType = new TypeToken<PlayableRacesIndexDTO>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -337,10 +337,10 @@ public class GameDataPlayableRaceApi {
         <tr><td> 4XX </td><td> Http 4XX </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getPlayableClassesIndexAsync(String namespace, final ApiCallback<PlayableClassesIndexDTO> _callback) throws ApiException {
+    public okhttp3.Call getPlayableRacesIndexAsync(String namespace, final ApiCallback<PlayableRacesIndexDTO> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getPlayableClassesIndexValidateBeforeCall(namespace, _callback);
-        Type localVarReturnType = new TypeToken<PlayableClassesIndexDTO>(){}.getType();
+        okhttp3.Call localVarCall = getPlayableRacesIndexValidateBeforeCall(namespace, _callback);
+        Type localVarReturnType = new TypeToken<PlayableRacesIndexDTO>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

@@ -15,8 +15,8 @@ package com.blizzardapi.openapi;
 
 import com.blizzardapi.ApiException;
 import com.blizzardapi.openapi.model.ApiErrorDTO;
-import com.blizzardapi.openapi.model.PlayableRaceDetailsDTO;
-import com.blizzardapi.openapi.model.PlayableRacesIndexDTO;
+import com.blizzardapi.openapi.model.PlayableClassDetailsDTO;
+import com.blizzardapi.openapi.model.PlayableClassesIndexDTO;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -34,27 +34,27 @@ public class GameDataPlayableClassApiTest {
     private final GameDataPlayableClassApi api = new GameDataPlayableClassApi();
 
     /**
-     * Returns a playable race by ID.
+     * Returns a playable class by ID.
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void getPlayableRaceTest() throws ApiException {
+    public void getPlayableClassTest() throws ApiException {
         String namespace = null;
-        Integer playableRaceId = null;
-        PlayableRaceDetailsDTO response = api.getPlayableRace(namespace, playableRaceId);
+        Integer classId = null;
+        PlayableClassDetailsDTO response = api.getPlayableClass(namespace, classId);
         // TODO: test validations
     }
 
     /**
-     * Returns an index of playable races.
+     * Returns an index of playable class.
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void getPlayableRacesIndexTest() throws ApiException {
+    public void getPlayableClassesIndexTest() throws ApiException {
         String namespace = null;
-        PlayableRacesIndexDTO response = api.getPlayableRacesIndex(namespace);
+        PlayableClassesIndexDTO response = api.getPlayableClassesIndex(namespace);
         // TODO: test validations
     }
 

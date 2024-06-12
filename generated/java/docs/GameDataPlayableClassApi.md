@@ -4,15 +4,15 @@ All URIs are relative to *https://eu.api.blizzard.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getPlayableRace**](GameDataPlayableClassApi.md#getPlayableRace) | **GET** /data/wow/playable-race/{playableRaceId} | Returns a playable race by ID. |
-| [**getPlayableRacesIndex**](GameDataPlayableClassApi.md#getPlayableRacesIndex) | **GET** /data/wow/playable-race/index | Returns an index of playable races. |
+| [**getPlayableClass**](GameDataPlayableClassApi.md#getPlayableClass) | **GET** /data/wow/playable-class/{classId} | Returns a playable class by ID. |
+| [**getPlayableClassesIndex**](GameDataPlayableClassApi.md#getPlayableClassesIndex) | **GET** /data/wow/playable-class/index | Returns an index of playable class. |
 
 
-<a id="getPlayableRace"></a>
-# **getPlayableRace**
-> PlayableRaceDetailsDTO getPlayableRace(namespace, playableRaceId)
+<a id="getPlayableClass"></a>
+# **getPlayableClass**
+> PlayableClassDetailsDTO getPlayableClass(namespace, classId)
 
-Returns a playable race by ID.
+Returns a playable class by ID.
 
 ### Example
 ```java
@@ -35,12 +35,12 @@ public class Example {
 
     GameDataPlayableClassApi apiInstance = new GameDataPlayableClassApi(defaultClient);
     String namespace = "static-eu"; // String | 
-    Integer playableRaceId = 56; // Integer | 
+    Integer classId = 56; // Integer | 
     try {
-      PlayableRaceDetailsDTO result = apiInstance.getPlayableRace(namespace, playableRaceId);
+      PlayableClassDetailsDTO result = apiInstance.getPlayableClass(namespace, classId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling GameDataPlayableClassApi#getPlayableRace");
+      System.err.println("Exception when calling GameDataPlayableClassApi#getPlayableClass");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -55,11 +55,11 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **namespace** | **String**|  | [default to static-eu] |
-| **playableRaceId** | **Integer**|  | |
+| **classId** | **Integer**|  | |
 
 ### Return type
 
-[**PlayableRaceDetailsDTO**](PlayableRaceDetailsDTO.md)
+[**PlayableClassDetailsDTO**](PlayableClassDetailsDTO.md)
 
 ### Authorization
 
@@ -76,11 +76,11 @@ public class Example {
 | **200** | Http 200 |  -  |
 | **4XX** | Http 4XX |  -  |
 
-<a id="getPlayableRacesIndex"></a>
-# **getPlayableRacesIndex**
-> PlayableRacesIndexDTO getPlayableRacesIndex(namespace)
+<a id="getPlayableClassesIndex"></a>
+# **getPlayableClassesIndex**
+> PlayableClassesIndexDTO getPlayableClassesIndex(namespace)
 
-Returns an index of playable races.
+Returns an index of playable class.
 
 ### Example
 ```java
@@ -104,10 +104,10 @@ public class Example {
     GameDataPlayableClassApi apiInstance = new GameDataPlayableClassApi(defaultClient);
     String namespace = "static-eu"; // String | 
     try {
-      PlayableRacesIndexDTO result = apiInstance.getPlayableRacesIndex(namespace);
+      PlayableClassesIndexDTO result = apiInstance.getPlayableClassesIndex(namespace);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling GameDataPlayableClassApi#getPlayableRacesIndex");
+      System.err.println("Exception when calling GameDataPlayableClassApi#getPlayableClassesIndex");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -125,7 +125,7 @@ public class Example {
 
 ### Return type
 
-[**PlayableRacesIndexDTO**](PlayableRacesIndexDTO.md)
+[**PlayableClassesIndexDTO**](PlayableClassesIndexDTO.md)
 
 ### Authorization
 

@@ -17,8 +17,8 @@ servers:
 security:
 - accessToken: []
 tags:
-- name: Game Data Playable Race
 - name: Game Data Playable Class
+- name: Game Data Playable Race
 - name: Game Data Playable Specialization
 - name: Game Data Realm
 paths:
@@ -47,9 +47,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorDTO'
           description: Http 4XX
-      summary: Returns an index of playable races.
+      summary: Returns an index of playable class.
       tags:
-      - Game Data Playable Race
+      - Game Data Playable Class
       x-accepts: application/json
   /data/wow/playable-class/{classId}:
     get:
@@ -85,7 +85,7 @@ paths:
           description: Http 4XX
       summary: Returns a playable class by ID.
       tags:
-      - Game Data Playable Race
+      - Game Data Playable Class
       x-accepts: application/json
   /data/wow/playable-race/index:
     get:
@@ -114,7 +114,7 @@ paths:
           description: Http 4XX
       summary: Returns an index of playable races.
       tags:
-      - Game Data Playable Class
+      - Game Data Playable Race
       x-accepts: application/json
   /data/wow/playable-race/{playableRaceId}:
     get:
@@ -150,7 +150,7 @@ paths:
           description: Http 4XX
       summary: Returns a playable race by ID.
       tags:
-      - Game Data Playable Class
+      - Game Data Playable Race
       x-accepts: application/json
   /data/wow/playable-specialization/index:
     get:
@@ -615,7 +615,7 @@ components:
       type: object
     RealmsIndexDTO:
       example:
-        classes:
+        realms:
         - name:
             it_IT: it_IT
             ru_RU: ru_RU
@@ -647,12 +647,12 @@ components:
           id: 0
           slug: slug
       properties:
-        classes:
+        realms:
           items:
             $ref: '#/components/schemas/IndexRealmDataDTO'
           type: array
       required:
-      - classes
+      - realms
       type: object
     FactionPlayableRaceDTO:
       example:
