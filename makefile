@@ -43,9 +43,9 @@ generate:
 	  --additional-properties=dateLibrary=java8 \
 	  --additional-properties=hideGenerationTimestamp=true
 
-.PHONY: package
-package:
-	mvn clean package -f $(GENERATED_DIR_JAVA)/pom.xml
+.PHONY: install
+install:
+	mvn clean install -f $(GENERATED_DIR_JAVA)/pom.xml
 
 .PHONY: all
-all: validate clean generate package
+all: validate clean generate install

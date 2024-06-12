@@ -1,7 +1,7 @@
 # openapi
 
 Blizzard API
-- API version: 0.3.0
+- API version: 0.3.1
 
 An OpenAPI specification for Blizzard API
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.blizzardapi</groupId>
   <artifactId>openapi</artifactId>
-  <version>0.3.0</version>
+  <version>0.3.1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.blizzardapi:openapi:0.3.0"
+     implementation "com.blizzardapi:openapi:0.3.1"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-0.3.0.jar`
+* `target/openapi-0.3.1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -97,12 +97,12 @@ public class Example {
 
     GameDataPlayableClassApi apiInstance = new GameDataPlayableClassApi(defaultClient);
     String namespace = "static-eu"; // String | 
-    Integer playableRaceId = 56; // Integer | 
+    Integer classId = 56; // Integer | 
     try {
-      PlayableRaceDetailsDTO result = apiInstance.getPlayableRace(namespace, playableRaceId);
+      PlayableClassDetailsDTO result = apiInstance.getPlayableClass(namespace, classId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling GameDataPlayableClassApi#getPlayableRace");
+      System.err.println("Exception when calling GameDataPlayableClassApi#getPlayableClass");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -119,10 +119,10 @@ All URIs are relative to *https://eu.api.blizzard.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*GameDataPlayableClassApi* | [**getPlayableRace**](docs/GameDataPlayableClassApi.md#getPlayableRace) | **GET** /data/wow/playable-race/{playableRaceId} | Returns a playable race by ID.
-*GameDataPlayableClassApi* | [**getPlayableRacesIndex**](docs/GameDataPlayableClassApi.md#getPlayableRacesIndex) | **GET** /data/wow/playable-race/index | Returns an index of playable races.
-*GameDataPlayableRaceApi* | [**getPlayableClass**](docs/GameDataPlayableRaceApi.md#getPlayableClass) | **GET** /data/wow/playable-class/{classId} | Returns a playable class by ID.
-*GameDataPlayableRaceApi* | [**getPlayableClassesIndex**](docs/GameDataPlayableRaceApi.md#getPlayableClassesIndex) | **GET** /data/wow/playable-class/index | Returns an index of playable races.
+*GameDataPlayableClassApi* | [**getPlayableClass**](docs/GameDataPlayableClassApi.md#getPlayableClass) | **GET** /data/wow/playable-class/{classId} | Returns a playable class by ID.
+*GameDataPlayableClassApi* | [**getPlayableClassesIndex**](docs/GameDataPlayableClassApi.md#getPlayableClassesIndex) | **GET** /data/wow/playable-class/index | Returns an index of playable class.
+*GameDataPlayableRaceApi* | [**getPlayableRace**](docs/GameDataPlayableRaceApi.md#getPlayableRace) | **GET** /data/wow/playable-race/{playableRaceId} | Returns a playable race by ID.
+*GameDataPlayableRaceApi* | [**getPlayableRacesIndex**](docs/GameDataPlayableRaceApi.md#getPlayableRacesIndex) | **GET** /data/wow/playable-race/index | Returns an index of playable races.
 *GameDataPlayableSpecializationApi* | [**getPlayableSpecialization**](docs/GameDataPlayableSpecializationApi.md#getPlayableSpecialization) | **GET** /data/wow/playable-specialization/{specId} | Returns a playable race by ID.
 *GameDataPlayableSpecializationApi* | [**getPlayableSpecializationsIndex**](docs/GameDataPlayableSpecializationApi.md#getPlayableSpecializationsIndex) | **GET** /data/wow/playable-specialization/index | Returns an index of playable specializations.
 *GameDataRealmApi* | [**getRealm**](docs/GameDataRealmApi.md#getRealm) | **GET** /data/wow/realm/{realmSlug} | Returns a single realm by slug or ID.
