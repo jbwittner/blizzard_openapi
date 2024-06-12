@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   description: An OpenAPI specification for Blizzard API
   title: Blizzard API
-  version: 0.2.1
+  version: 0.3.0
 servers:
 - url: "https://{region}.api.blizzard.com"
   variables:
@@ -17,9 +17,10 @@ servers:
 security:
 - accessToken: []
 tags:
-- name: Game Data Playable Class
 - name: Game Data Playable Race
+- name: Game Data Playable Class
 - name: Game Data Playable Specialization
+- name: Game Data Realm
 paths:
   /data/wow/playable-class/index:
     get:
@@ -216,6 +217,71 @@ paths:
       tags:
       - Game Data Playable Specialization
       x-accepts: application/json
+  /data/wow/realm/index:
+    get:
+      operationId: getRealmsIndex
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: dynamic-eu
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealmsIndexDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns an index of realms.
+      tags:
+      - Game Data Realm
+      x-accepts: application/json
+  /data/wow/realm/{realmSlug}:
+    get:
+      operationId: getRealm
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: dynamic-eu
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: realmSlug
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealmDetailsDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns a single realm by slug or ID.
+      tags:
+      - Game Data Realm
+      x-accepts: application/json
 components:
   schemas:
     ApiErrorDTO:
@@ -308,6 +374,35 @@ components:
       required:
       - id
       - name
+      type: object
+    IndexRealmDataDTO:
+      example:
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        id: 0
+        slug: slug
+      properties:
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        slug:
+          type: string
+        id:
+          type: integer
+      required:
+      - id
+      - name
+      - slug
       type: object
     IndexDataWithoutIdDTO:
       example:
@@ -517,6 +612,47 @@ components:
       required:
       - character_specializations
       - pet_specializations
+      type: object
+    RealmsIndexDTO:
+      example:
+        classes:
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+          slug: slug
+        - name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+          slug: slug
+      properties:
+        classes:
+          items:
+            $ref: '#/components/schemas/IndexRealmDataDTO'
+          type: array
+      required:
+      - classes
       type: object
     FactionPlayableRaceDTO:
       example:
@@ -1144,6 +1280,124 @@ components:
       - primary_stat_type
       - pvp_talents
       - role
+      type: object
+    RealmDetailsDTO:
+      example:
+        is_tournament: true
+        timezone: timezone
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        id: 0
+        region:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        category:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        locale: locale
+        type:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          type: type
+        slug: slug
+      properties:
+        id:
+          type: integer
+        region:
+          $ref: '#/components/schemas/IndexDataDTO'
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        category:
+          $ref: '#/components/schemas/NameDataDTO'
+        locale:
+          type: string
+        timezone:
+          type: string
+        type:
+          $ref: '#/components/schemas/RealmTypeDTO'
+        is_tournament:
+          type: boolean
+        slug:
+          type: string
+      required:
+      - category
+      - id
+      - is_tournament
+      - locale
+      - name
+      - region
+      - slug
+      - timezone
+      - type
+      type: object
+    RealmTypeDTO:
+      example:
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        type: type
+      properties:
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        type:
+          type: string
+      required:
+      - name
+      - type
       type: object
   securitySchemes:
     accessToken:

@@ -13,45 +13,39 @@
 
 package com.blizzardapi.openapi.model;
 
-import com.blizzardapi.openapi.model.NameDataDTO;
+import com.blizzardapi.openapi.model.IndexRealmDataDTO;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for FactionPlayableRaceDTO
+ * Model tests for RealmsIndexDTO
  */
-public class FactionPlayableRaceDTOTest {
-    private final FactionPlayableRaceDTO model = new FactionPlayableRaceDTO();
+public class RealmsIndexDTOTest {
+    private final RealmsIndexDTO model = new RealmsIndexDTO();
 
     /**
-     * Model tests for FactionPlayableRaceDTO
+     * Model tests for RealmsIndexDTO
      */
     @Test
-    public void testFactionPlayableRaceDTO() {
-        // TODO: test FactionPlayableRaceDTO
+    public void testRealmsIndexDTO() {
+        // TODO: test RealmsIndexDTO
     }
 
     /**
-     * Test the property 'type'
+     * Test the property 'classes'
      */
     @Test
-    public void typeTest() {
-        // TODO: test type
-    }
-
-    /**
-     * Test the property 'name'
-     */
-    @Test
-    public void nameTest() {
-        // TODO: test name
+    public void classesTest() {
+        // TODO: test classes
     }
 
 }

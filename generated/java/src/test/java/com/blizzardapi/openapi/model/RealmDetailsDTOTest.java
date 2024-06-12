@@ -13,33 +13,31 @@
 
 package com.blizzardapi.openapi.model;
 
-import com.blizzardapi.openapi.model.GenderDTO;
 import com.blizzardapi.openapi.model.IndexDataDTO;
 import com.blizzardapi.openapi.model.NameDataDTO;
+import com.blizzardapi.openapi.model.RealmTypeDTO;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for PlayableClassDetailsDTO
+ * Model tests for RealmDetailsDTO
  */
-public class PlayableClassDetailsDTOTest {
-    private final PlayableClassDetailsDTO model = new PlayableClassDetailsDTO();
+public class RealmDetailsDTOTest {
+    private final RealmDetailsDTO model = new RealmDetailsDTO();
 
     /**
-     * Model tests for PlayableClassDetailsDTO
+     * Model tests for RealmDetailsDTO
      */
     @Test
-    public void testPlayableClassDetailsDTO() {
-        // TODO: test PlayableClassDetailsDTO
+    public void testRealmDetailsDTO() {
+        // TODO: test RealmDetailsDTO
     }
 
     /**
@@ -51,6 +49,14 @@ public class PlayableClassDetailsDTOTest {
     }
 
     /**
+     * Test the property 'region'
+     */
+    @Test
+    public void regionTest() {
+        // TODO: test region
+    }
+
+    /**
      * Test the property 'name'
      */
     @Test
@@ -59,35 +65,51 @@ public class PlayableClassDetailsDTOTest {
     }
 
     /**
-     * Test the property 'genderName'
+     * Test the property 'category'
      */
     @Test
-    public void genderNameTest() {
-        // TODO: test genderName
+    public void categoryTest() {
+        // TODO: test category
     }
 
     /**
-     * Test the property 'powerType'
+     * Test the property 'locale'
      */
     @Test
-    public void powerTypeTest() {
-        // TODO: test powerType
+    public void localeTest() {
+        // TODO: test locale
     }
 
     /**
-     * Test the property 'specializations'
+     * Test the property 'timezone'
      */
     @Test
-    public void specializationsTest() {
-        // TODO: test specializations
+    public void timezoneTest() {
+        // TODO: test timezone
     }
 
     /**
-     * Test the property 'playableRaces'
+     * Test the property 'type'
      */
     @Test
-    public void playableRacesTest() {
-        // TODO: test playableRaces
+    public void typeTest() {
+        // TODO: test type
+    }
+
+    /**
+     * Test the property 'isTournament'
+     */
+    @Test
+    public void isTournamentTest() {
+        // TODO: test isTournament
+    }
+
+    /**
+     * Test the property 'slug'
+     */
+    @Test
+    public void slugTest() {
+        // TODO: test slug
     }
 
 }

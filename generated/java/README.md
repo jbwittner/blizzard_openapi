@@ -1,7 +1,7 @@
 # openapi
 
 Blizzard API
-- API version: 0.2.1
+- API version: 0.3.0
 
 An OpenAPI specification for Blizzard API
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.blizzardapi</groupId>
   <artifactId>openapi</artifactId>
-  <version>0.2.1</version>
+  <version>0.3.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.blizzardapi:openapi:0.2.1"
+     implementation "com.blizzardapi:openapi:0.3.0"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-0.2.1.jar`
+* `target/openapi-0.3.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -84,7 +84,7 @@ import com.blizzardapi.ApiException;
 import com.blizzardapi.Configuration;
 import com.blizzardapi.auth.*;
 import com.blizzardapi.models.*;
-import com.blizzardapi.openapi.PlayableClassApiApi;
+import com.blizzardapi.openapi.GameDataPlayableClassApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -95,14 +95,14 @@ public class Example {
     HttpBearerAuth accessToken = (HttpBearerAuth) defaultClient.getAuthentication("accessToken");
     accessToken.setBearerToken("BEARER TOKEN");
 
-    PlayableClassApiApi apiInstance = new PlayableClassApiApi(defaultClient);
+    GameDataPlayableClassApi apiInstance = new GameDataPlayableClassApi(defaultClient);
     String namespace = "static-eu"; // String | 
-    Integer classId = 56; // Integer | 
+    Integer playableRaceId = 56; // Integer | 
     try {
-      PlayableClassDetailsDTO result = apiInstance.getPlayableClass(namespace, classId);
+      PlayableRaceDetailsDTO result = apiInstance.getPlayableRace(namespace, playableRaceId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling PlayableClassApiApi#getPlayableClass");
+      System.err.println("Exception when calling GameDataPlayableClassApi#getPlayableRace");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -119,12 +119,14 @@ All URIs are relative to *https://eu.api.blizzard.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PlayableClassApiApi* | [**getPlayableClass**](docs/PlayableClassApiApi.md#getPlayableClass) | **GET** /data/wow/playable-class/{classId} | Returns a playable class by ID.
-*PlayableClassApiApi* | [**getPlayableClassesIndex**](docs/PlayableClassApiApi.md#getPlayableClassesIndex) | **GET** /data/wow/playable-class/index | Returns an index of playable races.
-*PlayableRaceApiApi* | [**getPlayableRace**](docs/PlayableRaceApiApi.md#getPlayableRace) | **GET** /data/wow/playable-race/{playableRaceId} | Returns a playable race by ID.
-*PlayableRaceApiApi* | [**getPlayableRacesIndex**](docs/PlayableRaceApiApi.md#getPlayableRacesIndex) | **GET** /data/wow/playable-race/index | Returns an index of playable races.
-*PlayableSpecializationApiApi* | [**getPlayableSpecialization**](docs/PlayableSpecializationApiApi.md#getPlayableSpecialization) | **GET** /data/wow/playable-specialization/{specId} | Returns a playable race by ID.
-*PlayableSpecializationApiApi* | [**getPlayableSpecializationsIndex**](docs/PlayableSpecializationApiApi.md#getPlayableSpecializationsIndex) | **GET** /data/wow/playable-specialization/index | Returns an index of playable specializations.
+*GameDataPlayableClassApi* | [**getPlayableRace**](docs/GameDataPlayableClassApi.md#getPlayableRace) | **GET** /data/wow/playable-race/{playableRaceId} | Returns a playable race by ID.
+*GameDataPlayableClassApi* | [**getPlayableRacesIndex**](docs/GameDataPlayableClassApi.md#getPlayableRacesIndex) | **GET** /data/wow/playable-race/index | Returns an index of playable races.
+*GameDataPlayableRaceApi* | [**getPlayableClass**](docs/GameDataPlayableRaceApi.md#getPlayableClass) | **GET** /data/wow/playable-class/{classId} | Returns a playable class by ID.
+*GameDataPlayableRaceApi* | [**getPlayableClassesIndex**](docs/GameDataPlayableRaceApi.md#getPlayableClassesIndex) | **GET** /data/wow/playable-class/index | Returns an index of playable races.
+*GameDataPlayableSpecializationApi* | [**getPlayableSpecialization**](docs/GameDataPlayableSpecializationApi.md#getPlayableSpecialization) | **GET** /data/wow/playable-specialization/{specId} | Returns a playable race by ID.
+*GameDataPlayableSpecializationApi* | [**getPlayableSpecializationsIndex**](docs/GameDataPlayableSpecializationApi.md#getPlayableSpecializationsIndex) | **GET** /data/wow/playable-specialization/index | Returns an index of playable specializations.
+*GameDataRealmApi* | [**getRealm**](docs/GameDataRealmApi.md#getRealm) | **GET** /data/wow/realm/{realmSlug} | Returns a single realm by slug or ID.
+*GameDataRealmApi* | [**getRealmsIndex**](docs/GameDataRealmApi.md#getRealmsIndex) | **GET** /data/wow/realm/index | Returns an index of realms.
 
 
 ## Documentation for Models
@@ -134,6 +136,7 @@ Class | Method | HTTP request | Description
  - [GenderDTO](docs/GenderDTO.md)
  - [IndexDataDTO](docs/IndexDataDTO.md)
  - [IndexDataWithoutIdDTO](docs/IndexDataWithoutIdDTO.md)
+ - [IndexRealmDataDTO](docs/IndexRealmDataDTO.md)
  - [NameDataDTO](docs/NameDataDTO.md)
  - [PlayableClassDetailsDTO](docs/PlayableClassDetailsDTO.md)
  - [PlayableClassesIndexDTO](docs/PlayableClassesIndexDTO.md)
@@ -141,6 +144,9 @@ Class | Method | HTTP request | Description
  - [PlayableRacesIndexDTO](docs/PlayableRacesIndexDTO.md)
  - [PlayableSpecializationDetailsDTO](docs/PlayableSpecializationDetailsDTO.md)
  - [PlayableSpecializationIndexDTO](docs/PlayableSpecializationIndexDTO.md)
+ - [RealmDetailsDTO](docs/RealmDetailsDTO.md)
+ - [RealmTypeDTO](docs/RealmTypeDTO.md)
+ - [RealmsIndexDTO](docs/RealmsIndexDTO.md)
  - [RoleIndexDTO](docs/RoleIndexDTO.md)
  - [TalentDescritpionIndexDTO](docs/TalentDescritpionIndexDTO.md)
  - [TalentIndexDTO](docs/TalentIndexDTO.md)
