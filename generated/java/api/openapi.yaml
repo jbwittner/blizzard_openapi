@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   description: An OpenAPI specification for Blizzard API
   title: Blizzard API
-  version: 0.3.0
+  version: 0.3.1
 servers:
 - url: "https://{region}.api.blizzard.com"
   variables:
@@ -869,18 +869,20 @@ components:
           de_DE: de_DE
         id: 0
         power_type:
-          it_IT: it_IT
-          ru_RU: ru_RU
-          en_GB: en_GB
-          zh_TW: zh_TW
-          ko_KR: ko_KR
-          en_US: en_US
-          es_MX: es_MX
-          pt_BR: pt_BR
-          es_ES: es_ES
-          zh_CN: zh_CN
-          fr_FR: fr_FR
-          de_DE: de_DE
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
         gender_name:
           female:
             it_IT: it_IT
@@ -916,7 +918,7 @@ components:
         gender_name:
           $ref: '#/components/schemas/GenderDTO'
         power_type:
-          $ref: '#/components/schemas/NameDataDTO'
+          $ref: '#/components/schemas/IndexDataDTO'
         specializations:
           items:
             $ref: '#/components/schemas/IndexDataDTO'

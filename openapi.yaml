@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Blizzard API
-  version: 0.3.0
+  version: 0.3.1
   description: An OpenAPI specification for Blizzard API
 servers:
   - url: https://{region}.api.blizzard.com
@@ -437,7 +437,7 @@ components:
         gender_name:
           $ref: '#/components/schemas/GenderDTO'
         power_type:
-          $ref: '#/components/schemas/NameDataDTO'
+          $ref: '#/components/schemas/IndexDataDTO'
         specializations:
           type: array
           items:

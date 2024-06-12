@@ -1,7 +1,7 @@
 # openapi
 
 Blizzard API
-- API version: 0.3.0
+- API version: 0.3.1
 
 An OpenAPI specification for Blizzard API
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.blizzardapi</groupId>
   <artifactId>openapi</artifactId>
-  <version>0.3.0</version>
+  <version>0.3.1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.blizzardapi:openapi:0.3.0"
+     implementation "com.blizzardapi:openapi:0.3.1"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-0.3.0.jar`
+* `target/openapi-0.3.1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
