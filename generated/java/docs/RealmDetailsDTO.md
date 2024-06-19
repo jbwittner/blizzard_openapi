@@ -13,7 +13,7 @@
 |**category** | [**NameDataDTO**](NameDataDTO.md) |  |  |
 |**locale** | **String** |  |  |
 |**timezone** | **String** |  |  |
-|**type** | [**RealmTypeDTO**](RealmTypeDTO.md) |  |  |
+|**type** | [**TypeDTO**](TypeDTO.md) |  |  |
 |**isTournament** | **Boolean** |  |  |
 |**slug** | **String** |  |  |
 

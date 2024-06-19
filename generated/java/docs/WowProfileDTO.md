@@ -1,14 +1,14 @@
 
 
-# RealmTypeDTO
+# WowProfileDTO
 
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**name** | [**NameDataDTO**](NameDataDTO.md) |  |  |
-|**type** | **String** |  |  |
+|**id** | **Integer** |  |  |
+|**wowAccounts** | [**List&lt;WowAccountDTO&gt;**](WowAccountDTO.md) |  |  |
 
 
 

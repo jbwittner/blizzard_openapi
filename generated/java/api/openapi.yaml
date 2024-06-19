@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   description: An OpenAPI specification for Blizzard API
   title: Blizzard API
-  version: 0.3.1
+  version: 0.4.0
 servers:
 - url: "https://{region}.api.blizzard.com"
   variables:
@@ -21,6 +21,8 @@ tags:
 - name: Game Data Playable Race
 - name: Game Data Playable Specialization
 - name: Game Data Realm
+- name: Profile Account Profile
+- name: Profile Character Profile
 paths:
   /data/wow/playable-class/index:
     get:
@@ -281,6 +283,78 @@ paths:
       summary: Returns a single realm by slug or ID.
       tags:
       - Game Data Realm
+      x-accepts: application/json
+  /profile/user/wow:
+    get:
+      operationId: getAccountProfile
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: profile-eu
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WowProfileDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns a profile summary for an account.
+      tags:
+      - Profile Account Profile
+      x-accepts: application/json
+  /profile/wow/character/{realmSlug}/{characterName}:
+    get:
+      operationId: getCharacterProfile
+      parameters:
+      - explode: true
+        in: query
+        name: namespace
+        required: true
+        schema:
+          default: profile-eu
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: realmSlug
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: characterName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterProfileSummaryDTO'
+          description: Http 200
+        "4XX":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+          description: Http 4XX
+      summary: Returns a profile summary for a character.
+      tags:
+      - Profile Character Profile
       x-accepts: application/json
 components:
   schemas:
@@ -1360,7 +1434,7 @@ components:
         timezone:
           type: string
         type:
-          $ref: '#/components/schemas/RealmTypeDTO'
+          $ref: '#/components/schemas/TypeDTO'
         is_tournament:
           type: boolean
         slug:
@@ -1376,7 +1450,7 @@ components:
       - timezone
       - type
       type: object
-    RealmTypeDTO:
+    TypeDTO:
       example:
         name:
           it_IT: it_IT
@@ -1400,6 +1474,931 @@ components:
       required:
       - name
       - type
+      type: object
+    AccountCharacterProfileSummaryDTO:
+      example:
+        playable_class:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        gender:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          type: type
+        level: 5
+        faction:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          type: type
+        name: name
+        realm:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+          slug: slug
+        id: 1
+        playable_race:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+        level:
+          type: integer
+        realm:
+          $ref: '#/components/schemas/IndexRealmDataDTO'
+        playable_class:
+          $ref: '#/components/schemas/IndexDataDTO'
+        playable_race:
+          $ref: '#/components/schemas/IndexDataDTO'
+        gender:
+          $ref: '#/components/schemas/TypeDTO'
+        faction:
+          $ref: '#/components/schemas/TypeDTO'
+      required:
+      - faction
+      - gender
+      - id
+      - level
+      - name
+      - playable_class
+      - playable_race
+      - realm
+      type: object
+    WowAccountDTO:
+      example:
+        characters:
+        - playable_class:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            id: 0
+          gender:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            type: type
+          level: 5
+          faction:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            type: type
+          name: name
+          realm:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            id: 0
+            slug: slug
+          id: 1
+          playable_race:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            id: 0
+        - playable_class:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            id: 0
+          gender:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            type: type
+          level: 5
+          faction:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            type: type
+          name: name
+          realm:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            id: 0
+            slug: slug
+          id: 1
+          playable_race:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            id: 0
+        id: 6
+      properties:
+        id:
+          type: integer
+        characters:
+          items:
+            $ref: '#/components/schemas/AccountCharacterProfileSummaryDTO'
+          type: array
+      required:
+      - characters
+      - id
+      type: object
+    WowProfileDTO:
+      example:
+        wow_accounts:
+        - characters:
+          - playable_class:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+            gender:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              type: type
+            level: 5
+            faction:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              type: type
+            name: name
+            realm:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+              slug: slug
+            id: 1
+            playable_race:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+          - playable_class:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+            gender:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              type: type
+            level: 5
+            faction:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              type: type
+            name: name
+            realm:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+              slug: slug
+            id: 1
+            playable_race:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+          id: 6
+        - characters:
+          - playable_class:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+            gender:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              type: type
+            level: 5
+            faction:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              type: type
+            name: name
+            realm:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+              slug: slug
+            id: 1
+            playable_race:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+          - playable_class:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+            gender:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              type: type
+            level: 5
+            faction:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              type: type
+            name: name
+            realm:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+              slug: slug
+            id: 1
+            playable_race:
+              name:
+                it_IT: it_IT
+                ru_RU: ru_RU
+                en_GB: en_GB
+                zh_TW: zh_TW
+                ko_KR: ko_KR
+                en_US: en_US
+                es_MX: es_MX
+                pt_BR: pt_BR
+                es_ES: es_ES
+                zh_CN: zh_CN
+                fr_FR: fr_FR
+                de_DE: de_DE
+              id: 0
+          id: 6
+        id: 0
+      properties:
+        id:
+          type: integer
+        wow_accounts:
+          items:
+            $ref: '#/components/schemas/WowAccountDTO'
+          type: array
+      required:
+      - id
+      - wow_accounts
+      type: object
+    GuildIndexDTO:
+      example:
+        faction:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          type: type
+        name: name
+        realm:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+          slug: slug
+        id: 6
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+        realm:
+          $ref: '#/components/schemas/IndexRealmDataDTO'
+        faction:
+          $ref: '#/components/schemas/TypeDTO'
+      required:
+      - faction
+      - id
+      - name
+      - realm
+      type: object
+    ActiveTitleDTO:
+      example:
+        display_string:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        name:
+          it_IT: it_IT
+          ru_RU: ru_RU
+          en_GB: en_GB
+          zh_TW: zh_TW
+          ko_KR: ko_KR
+          en_US: en_US
+          es_MX: es_MX
+          pt_BR: pt_BR
+          es_ES: es_ES
+          zh_CN: zh_CN
+          fr_FR: fr_FR
+          de_DE: de_DE
+        id: 3
+      properties:
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        id:
+          type: integer
+        display_string:
+          $ref: '#/components/schemas/NameDataDTO'
+      required:
+      - display_string
+      - id
+      - name
+      type: object
+    CharacterProfileSummaryDTO:
+      example:
+        active_spec:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        last_login_timestamp: 2
+        name_search: name_search
+        gender:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          type: type
+        race:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        level: 1
+        character_class:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+        achievement_points: 5
+        experience: 5
+        guild:
+          faction:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            type: type
+          name: name
+          realm:
+            name:
+              it_IT: it_IT
+              ru_RU: ru_RU
+              en_GB: en_GB
+              zh_TW: zh_TW
+              ko_KR: ko_KR
+              en_US: en_US
+              es_MX: es_MX
+              pt_BR: pt_BR
+              es_ES: es_ES
+              zh_CN: zh_CN
+              fr_FR: fr_FR
+              de_DE: de_DE
+            id: 0
+            slug: slug
+          id: 6
+        average_item_level: 7
+        equipped_item_level: 9
+        active_title:
+          display_string:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 3
+        faction:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          type: type
+        name: name
+        realm:
+          name:
+            it_IT: it_IT
+            ru_RU: ru_RU
+            en_GB: en_GB
+            zh_TW: zh_TW
+            ko_KR: ko_KR
+            en_US: en_US
+            es_MX: es_MX
+            pt_BR: pt_BR
+            es_ES: es_ES
+            zh_CN: zh_CN
+            fr_FR: fr_FR
+            de_DE: de_DE
+          id: 0
+          slug: slug
+        id: 0
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        gender:
+          $ref: '#/components/schemas/TypeDTO'
+        faction:
+          $ref: '#/components/schemas/TypeDTO'
+        race:
+          $ref: '#/components/schemas/IndexDataDTO'
+        character_class:
+          $ref: '#/components/schemas/IndexDataDTO'
+        active_spec:
+          $ref: '#/components/schemas/IndexDataDTO'
+        realm:
+          $ref: '#/components/schemas/IndexRealmDataDTO'
+        guild:
+          $ref: '#/components/schemas/GuildIndexDTO'
+        level:
+          type: integer
+        experience:
+          type: integer
+        achievement_points:
+          type: integer
+        last_login_timestamp:
+          type: integer
+        average_item_level:
+          type: integer
+        equipped_item_level:
+          type: integer
+        active_title:
+          $ref: '#/components/schemas/ActiveTitleDTO'
+        name_search:
+          type: string
+      required:
+      - achievement_points
+      - active_spec
+      - active_title
+      - average_item_level
+      - character_class
+      - equipped_item_level
+      - experience
+      - faction
+      - gender
+      - guild
+      - id
+      - last_login_timestamp
+      - level
+      - name
+      - name_search
+      - race
+      - realm
       type: object
   securitySchemes:
     accessToken:
