@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Blizzard API
-  version: 0.3.1
+  version: 0.4.0
   description: An OpenAPI specification for Blizzard API
 servers:
   - url: https://{region}.api.blizzard.com
@@ -19,6 +19,8 @@ tags:
   - name: Game Data Playable Race
   - name: Game Data Playable Specialization
   - name: Game Data Realm
+  - name: Profile Account Profile
+  - name: Profile Character Profile
 security:
   - accessToken: []
 paths:
@@ -244,6 +246,68 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RealmDetailsDTO'
+        4XX:
+          description: Http 4XX
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+  /profile/user/wow:
+    get:
+      tags:
+        - Profile Account Profile
+      summary: Returns a profile summary for an account.
+      operationId: getAccountProfile
+      parameters:
+        - in: query
+          name: namespace
+          schema:
+            type: string
+            default: profile-eu
+          required: true
+      responses:
+        '200':
+          description: Http 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WowProfileDTO'
+        4XX:
+          description: Http 4XX
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorDTO'
+  /profile/wow/character/{realmSlug}/{characterName}:
+    get:
+      tags:
+        - Profile Character Profile
+      summary: Returns a profile summary for a character.
+      operationId: getCharacterProfile
+      parameters:
+        - in: query
+          name: namespace
+          schema:
+            type: string
+            default: profile-eu
+          required: true
+        - in: path
+          name: realmSlug
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: characterName
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Http 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterProfileSummaryDTO'
         4XX:
           description: Http 4XX
           content:
@@ -531,7 +595,7 @@ components:
         timezone:
           type: string
         type:
-          $ref: '#/components/schemas/RealmTypeDTO'
+          $ref: '#/components/schemas/TypeDTO'
         is_tournament:
           type: boolean
         slug:
@@ -546,7 +610,7 @@ components:
         - type
         - is_tournament
         - slug
-    RealmTypeDTO:
+    TypeDTO:
       type: object
       properties:
         name:
@@ -556,3 +620,139 @@ components:
       required:
         - name
         - type
+    AccountCharacterProfileSummaryDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+        level:
+          type: integer
+        realm:
+          $ref: '#/components/schemas/IndexRealmDataDTO'
+        playable_class:
+          $ref: '#/components/schemas/IndexDataDTO'
+        playable_race:
+          $ref: '#/components/schemas/IndexDataDTO'
+        gender:
+          $ref: '#/components/schemas/TypeDTO'
+        faction:
+          $ref: '#/components/schemas/TypeDTO'
+      required:
+        - name
+        - id
+        - level
+        - realm
+        - playable_class
+        - playable_race
+        - gender
+        - faction
+    WowAccountDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        characters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountCharacterProfileSummaryDTO'
+      required:
+        - id
+        - characters
+    WowProfileDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        wow_accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/WowAccountDTO'
+      required:
+        - id
+        - wow_accounts
+    GuildIndexDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+        realm:
+          $ref: '#/components/schemas/IndexRealmDataDTO'
+        faction:
+          $ref: '#/components/schemas/TypeDTO'
+      required:
+        - name
+        - id
+        - realm
+        - faction
+    ActiveTitleDTO:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/NameDataDTO'
+        id:
+          type: integer
+        display_string:
+          $ref: '#/components/schemas/NameDataDTO'
+      required:
+        - name
+        - id
+        - display_string
+    CharacterProfileSummaryDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        gender:
+          $ref: '#/components/schemas/TypeDTO'
+        faction:
+          $ref: '#/components/schemas/TypeDTO'
+        race:
+          $ref: '#/components/schemas/IndexDataDTO'
+        character_class:
+          $ref: '#/components/schemas/IndexDataDTO'
+        active_spec:
+          $ref: '#/components/schemas/IndexDataDTO'
+        realm:
+          $ref: '#/components/schemas/IndexRealmDataDTO'
+        guild:
+          $ref: '#/components/schemas/GuildIndexDTO'
+        level:
+          type: integer
+        experience:
+          type: integer
+        achievement_points:
+          type: integer
+        last_login_timestamp:
+          type: integer
+        average_item_level:
+          type: integer
+        equipped_item_level:
+          type: integer
+        active_title:
+          $ref: '#/components/schemas/ActiveTitleDTO'
+        name_search:
+          type: string
+      required:
+        - id
+        - name
+        - gender
+        - faction
+        - race
+        - character_class
+        - active_spec
+        - realm
+        - guild
+        - level
+        - experience
+        - achievement_points
+        - last_login_timestamp
+        - average_item_level
+        - equipped_item_level
+        - active_title
+        - name_search
