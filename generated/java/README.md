@@ -1,7 +1,7 @@
 # openapi
 
 Blizzard API
-- API version: 0.3.1
+- API version: 0.4.0
 
 An OpenAPI specification for Blizzard API
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.blizzardapi</groupId>
   <artifactId>openapi</artifactId>
-  <version>0.3.1</version>
+  <version>0.4.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.blizzardapi:openapi:0.3.1"
+     implementation "com.blizzardapi:openapi:0.4.0"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-0.3.1.jar`
+* `target/openapi-0.4.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -127,13 +127,19 @@ Class | Method | HTTP request | Description
 *GameDataPlayableSpecializationApi* | [**getPlayableSpecializationsIndex**](docs/GameDataPlayableSpecializationApi.md#getPlayableSpecializationsIndex) | **GET** /data/wow/playable-specialization/index | Returns an index of playable specializations.
 *GameDataRealmApi* | [**getRealm**](docs/GameDataRealmApi.md#getRealm) | **GET** /data/wow/realm/{realmSlug} | Returns a single realm by slug or ID.
 *GameDataRealmApi* | [**getRealmsIndex**](docs/GameDataRealmApi.md#getRealmsIndex) | **GET** /data/wow/realm/index | Returns an index of realms.
+*ProfileAccountProfileApi* | [**getAccountProfile**](docs/ProfileAccountProfileApi.md#getAccountProfile) | **GET** /profile/user/wow | Returns a profile summary for an account.
+*ProfileCharacterProfileApi* | [**getCharacterProfile**](docs/ProfileCharacterProfileApi.md#getCharacterProfile) | **GET** /profile/wow/character/{realmSlug}/{characterName} | Returns a profile summary for a character.
 
 
 ## Documentation for Models
 
+ - [AccountCharacterProfileSummaryDTO](docs/AccountCharacterProfileSummaryDTO.md)
+ - [ActiveTitleDTO](docs/ActiveTitleDTO.md)
  - [ApiErrorDTO](docs/ApiErrorDTO.md)
+ - [CharacterProfileSummaryDTO](docs/CharacterProfileSummaryDTO.md)
  - [FactionPlayableRaceDTO](docs/FactionPlayableRaceDTO.md)
  - [GenderDTO](docs/GenderDTO.md)
+ - [GuildIndexDTO](docs/GuildIndexDTO.md)
  - [IndexDataDTO](docs/IndexDataDTO.md)
  - [IndexDataWithoutIdDTO](docs/IndexDataWithoutIdDTO.md)
  - [IndexRealmDataDTO](docs/IndexRealmDataDTO.md)
@@ -145,11 +151,13 @@ Class | Method | HTTP request | Description
  - [PlayableSpecializationDetailsDTO](docs/PlayableSpecializationDetailsDTO.md)
  - [PlayableSpecializationIndexDTO](docs/PlayableSpecializationIndexDTO.md)
  - [RealmDetailsDTO](docs/RealmDetailsDTO.md)
- - [RealmTypeDTO](docs/RealmTypeDTO.md)
  - [RealmsIndexDTO](docs/RealmsIndexDTO.md)
  - [RoleIndexDTO](docs/RoleIndexDTO.md)
  - [TalentDescritpionIndexDTO](docs/TalentDescritpionIndexDTO.md)
  - [TalentIndexDTO](docs/TalentIndexDTO.md)
+ - [TypeDTO](docs/TypeDTO.md)
+ - [WowAccountDTO](docs/WowAccountDTO.md)
+ - [WowProfileDTO](docs/WowProfileDTO.md)
 
 
 <a id="documentation-for-authorization"></a>
