@@ -2200,6 +2200,7 @@ components:
             de_DE: de_DE
           id: 0
         last_login_timestamp: 2
+        name_search: name_search
         gender:
           name:
             it_IT: it_IT
@@ -2378,6 +2379,8 @@ components:
           type: integer
         active_title:
           $ref: '#/components/schemas/ActiveTitleDTO'
+        name_search:
+          type: string
       required:
       - achievement_points
       - active_spec
@@ -2388,7 +2391,6 @@ components:
       - experience
       - faction
       - gender
-      - guild
       - id
       - last_login_timestamp
       - level

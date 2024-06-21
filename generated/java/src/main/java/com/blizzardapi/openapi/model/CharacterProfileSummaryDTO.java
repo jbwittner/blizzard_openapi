@@ -120,6 +120,10 @@ public class CharacterProfileSummaryDTO {
   @SerializedName(SERIALIZED_NAME_ACTIVE_TITLE)
   private ActiveTitleDTO activeTitle;
 
+  public static final String SERIALIZED_NAME_NAME_SEARCH = "name_search";
+  @SerializedName(SERIALIZED_NAME_NAME_SEARCH)
+  private String nameSearch;
+
   public CharacterProfileSummaryDTO() {
   }
 
@@ -284,7 +288,7 @@ public class CharacterProfileSummaryDTO {
    * Get guild
    * @return guild
   **/
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public GuildIndexDTO getGuild() {
     return guild;
   }
@@ -426,6 +430,25 @@ public class CharacterProfileSummaryDTO {
     this.activeTitle = activeTitle;
   }
 
+
+  public CharacterProfileSummaryDTO nameSearch(String nameSearch) {
+    this.nameSearch = nameSearch;
+    return this;
+  }
+
+   /**
+   * Get nameSearch
+   * @return nameSearch
+  **/
+  @javax.annotation.Nullable
+  public String getNameSearch() {
+    return nameSearch;
+  }
+
+  public void setNameSearch(String nameSearch) {
+    this.nameSearch = nameSearch;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -496,13 +519,14 @@ public class CharacterProfileSummaryDTO {
         Objects.equals(this.lastLoginTimestamp, characterProfileSummaryDTO.lastLoginTimestamp) &&
         Objects.equals(this.averageItemLevel, characterProfileSummaryDTO.averageItemLevel) &&
         Objects.equals(this.equippedItemLevel, characterProfileSummaryDTO.equippedItemLevel) &&
-        Objects.equals(this.activeTitle, characterProfileSummaryDTO.activeTitle)&&
+        Objects.equals(this.activeTitle, characterProfileSummaryDTO.activeTitle) &&
+        Objects.equals(this.nameSearch, characterProfileSummaryDTO.nameSearch)&&
         Objects.equals(this.additionalProperties, characterProfileSummaryDTO.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, gender, faction, race, characterClass, activeSpec, realm, guild, level, experience, achievementPoints, lastLoginTimestamp, averageItemLevel, equippedItemLevel, activeTitle, additionalProperties);
+    return Objects.hash(id, name, gender, faction, race, characterClass, activeSpec, realm, guild, level, experience, achievementPoints, lastLoginTimestamp, averageItemLevel, equippedItemLevel, activeTitle, nameSearch, additionalProperties);
   }
 
   @Override
@@ -525,6 +549,7 @@ public class CharacterProfileSummaryDTO {
     sb.append("    averageItemLevel: ").append(toIndentedString(averageItemLevel)).append("\n");
     sb.append("    equippedItemLevel: ").append(toIndentedString(equippedItemLevel)).append("\n");
     sb.append("    activeTitle: ").append(toIndentedString(activeTitle)).append("\n");
+    sb.append("    nameSearch: ").append(toIndentedString(nameSearch)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -564,6 +589,7 @@ public class CharacterProfileSummaryDTO {
     openapiFields.add("average_item_level");
     openapiFields.add("equipped_item_level");
     openapiFields.add("active_title");
+    openapiFields.add("name_search");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -575,7 +601,6 @@ public class CharacterProfileSummaryDTO {
     openapiRequiredFields.add("character_class");
     openapiRequiredFields.add("active_spec");
     openapiRequiredFields.add("realm");
-    openapiRequiredFields.add("guild");
     openapiRequiredFields.add("level");
     openapiRequiredFields.add("experience");
     openapiRequiredFields.add("achievement_points");
@@ -620,10 +645,15 @@ public class CharacterProfileSummaryDTO {
       IndexDataDTO.validateJsonElement(jsonObj.get("active_spec"));
       // validate the required field `realm`
       IndexRealmDataDTO.validateJsonElement(jsonObj.get("realm"));
-      // validate the required field `guild`
-      GuildIndexDTO.validateJsonElement(jsonObj.get("guild"));
+      // validate the optional field `guild`
+      if (jsonObj.get("guild") != null && !jsonObj.get("guild").isJsonNull()) {
+        GuildIndexDTO.validateJsonElement(jsonObj.get("guild"));
+      }
       // validate the required field `active_title`
       ActiveTitleDTO.validateJsonElement(jsonObj.get("active_title"));
+      if ((jsonObj.get("name_search") != null && !jsonObj.get("name_search").isJsonNull()) && !jsonObj.get("name_search").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `name_search` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name_search").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

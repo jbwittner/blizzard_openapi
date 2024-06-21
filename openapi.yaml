@@ -736,6 +736,8 @@ components:
           type: integer
         active_title:
           $ref: '#/components/schemas/ActiveTitleDTO'
+        name_search:
+          type: string
       required:
         - id
         - name
@@ -745,7 +747,6 @@ components:
         - character_class
         - active_spec
         - realm
-        - guild
         - level
         - experience
         - achievement_points

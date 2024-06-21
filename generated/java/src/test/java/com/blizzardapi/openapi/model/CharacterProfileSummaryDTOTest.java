@@ -170,4 +170,12 @@ public class CharacterProfileSummaryDTOTest {
         // TODO: test activeTitle
     }
 
+    /**
+     * Test the property 'nameSearch'
+     */
+    @Test
+    public void nameSearchTest() {
+        // TODO: test nameSearch
+    }
+
 }
