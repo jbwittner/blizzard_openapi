@@ -23,7 +23,6 @@
 |**averageItemLevel** | **Integer** |  |  |
 |**equippedItemLevel** | **Integer** |  |  |
 |**activeTitle** | [**ActiveTitleDTO**](ActiveTitleDTO.md) |  |  |
-|**nameSearch** | **String** |  |  |
 
 
 
