@@ -21,7 +21,7 @@
 |**achievementPoints** | **Integer** |  |  |
 |**lastLoginTimestamp** | **Integer** |  |  |
 |**averageItemLevel** | **Integer** |  |  |
-|**equippedItemLevel** | **Integer** |  |  |
+|**equippedItemLevel** | **Long** |  |  |
 |**activeTitle** | [**ActiveTitleDTO**](ActiveTitleDTO.md) |  |  [optional] |
 |**nameSearch** | **String** |  |  [optional] |
 

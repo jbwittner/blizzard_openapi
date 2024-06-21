@@ -2376,6 +2376,7 @@ components:
         average_item_level:
           type: integer
         equipped_item_level:
+          format: int64
           type: integer
         active_title:
           $ref: '#/components/schemas/ActiveTitleDTO'

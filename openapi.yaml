@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Blizzard API
-  version: 0.4.3
+  version: 0.4.4
   description: OpenAPI specification for Blizzard API
 servers:
   - url: https://{region}.api.blizzard.com
@@ -734,6 +734,7 @@ components:
           type: integer
         equipped_item_level:
           type: integer
+          format: int64
         active_title:
           $ref: '#/components/schemas/ActiveTitleDTO'
         name_search:
