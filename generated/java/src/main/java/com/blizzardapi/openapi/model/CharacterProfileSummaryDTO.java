@@ -106,7 +106,7 @@ public class CharacterProfileSummaryDTO {
 
   public static final String SERIALIZED_NAME_LAST_LOGIN_TIMESTAMP = "last_login_timestamp";
   @SerializedName(SERIALIZED_NAME_LAST_LOGIN_TIMESTAMP)
-  private Integer lastLoginTimestamp;
+  private Long lastLoginTimestamp;
 
   public static final String SERIALIZED_NAME_AVERAGE_ITEM_LEVEL = "average_item_level";
   @SerializedName(SERIALIZED_NAME_AVERAGE_ITEM_LEVEL)
@@ -114,7 +114,7 @@ public class CharacterProfileSummaryDTO {
 
   public static final String SERIALIZED_NAME_EQUIPPED_ITEM_LEVEL = "equipped_item_level";
   @SerializedName(SERIALIZED_NAME_EQUIPPED_ITEM_LEVEL)
-  private Long equippedItemLevel;
+  private Integer equippedItemLevel;
 
   public static final String SERIALIZED_NAME_ACTIVE_TITLE = "active_title";
   @SerializedName(SERIALIZED_NAME_ACTIVE_TITLE)
@@ -355,7 +355,7 @@ public class CharacterProfileSummaryDTO {
   }
 
 
-  public CharacterProfileSummaryDTO lastLoginTimestamp(Integer lastLoginTimestamp) {
+  public CharacterProfileSummaryDTO lastLoginTimestamp(Long lastLoginTimestamp) {
     this.lastLoginTimestamp = lastLoginTimestamp;
     return this;
   }
@@ -365,11 +365,11 @@ public class CharacterProfileSummaryDTO {
    * @return lastLoginTimestamp
   **/
   @javax.annotation.Nonnull
-  public Integer getLastLoginTimestamp() {
+  public Long getLastLoginTimestamp() {
     return lastLoginTimestamp;
   }
 
-  public void setLastLoginTimestamp(Integer lastLoginTimestamp) {
+  public void setLastLoginTimestamp(Long lastLoginTimestamp) {
     this.lastLoginTimestamp = lastLoginTimestamp;
   }
 
@@ -393,7 +393,7 @@ public class CharacterProfileSummaryDTO {
   }
 
 
-  public CharacterProfileSummaryDTO equippedItemLevel(Long equippedItemLevel) {
+  public CharacterProfileSummaryDTO equippedItemLevel(Integer equippedItemLevel) {
     this.equippedItemLevel = equippedItemLevel;
     return this;
   }
@@ -403,11 +403,11 @@ public class CharacterProfileSummaryDTO {
    * @return equippedItemLevel
   **/
   @javax.annotation.Nonnull
-  public Long getEquippedItemLevel() {
+  public Integer getEquippedItemLevel() {
     return equippedItemLevel;
   }
 
-  public void setEquippedItemLevel(Long equippedItemLevel) {
+  public void setEquippedItemLevel(Integer equippedItemLevel) {
     this.equippedItemLevel = equippedItemLevel;
   }
 

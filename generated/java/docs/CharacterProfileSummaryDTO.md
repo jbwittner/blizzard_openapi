@@ -19,9 +19,9 @@
 |**level** | **Integer** |  |  |
 |**experience** | **Integer** |  |  |
 |**achievementPoints** | **Integer** |  |  |
-|**lastLoginTimestamp** | **Integer** |  |  |
+|**lastLoginTimestamp** | **Long** |  |  |
 |**averageItemLevel** | **Integer** |  |  |
-|**equippedItemLevel** | **Long** |  |  |
+|**equippedItemLevel** | **Integer** |  |  |
 |**activeTitle** | [**ActiveTitleDTO**](ActiveTitleDTO.md) |  |  [optional] |
 |**nameSearch** | **String** |  |  [optional] |
 
