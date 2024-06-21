@@ -15,7 +15,7 @@
 |**characterClass** | [**IndexDataDTO**](IndexDataDTO.md) |  |  |
 |**activeSpec** | [**IndexDataDTO**](IndexDataDTO.md) |  |  |
 |**realm** | [**IndexRealmDataDTO**](IndexRealmDataDTO.md) |  |  |
-|**guild** | [**GuildIndexDTO**](GuildIndexDTO.md) |  |  |
+|**guild** | [**GuildIndexDTO**](GuildIndexDTO.md) |  |  [optional] |
 |**level** | **Integer** |  |  |
 |**experience** | **Integer** |  |  |
 |**achievementPoints** | **Integer** |  |  |
@@ -23,6 +23,7 @@
 |**averageItemLevel** | **Integer** |  |  |
 |**equippedItemLevel** | **Integer** |  |  |
 |**activeTitle** | [**ActiveTitleDTO**](ActiveTitleDTO.md) |  |  |
+|**nameSearch** | **String** |  |  [optional] |
 
 
 

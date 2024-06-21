@@ -2,7 +2,7 @@ lazy val root = (project in file(".")).
   settings(
     organization := "com.blizzardapi",
     name := "openapi",
-    version := "0.4.1",
+    version := "0.4.2",
     scalaVersion := "2.11.4",
     scalacOptions ++= Seq("-feature"),
     javacOptions in compile ++= Seq("-Xlint:deprecation"),
