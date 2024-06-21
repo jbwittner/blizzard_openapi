@@ -2384,7 +2384,6 @@ components:
       required:
       - achievement_points
       - active_spec
-      - active_title
       - average_item_level
       - character_class
       - equipped_item_level
