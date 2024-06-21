@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Blizzard API
-  version: 0.4.2
+  version: 0.4.3
   description: OpenAPI specification for Blizzard API
 servers:
   - url: https://{region}.api.blizzard.com
@@ -753,4 +753,3 @@ components:
         - last_login_timestamp
         - average_item_level
         - equipped_item_level
-        - active_title
