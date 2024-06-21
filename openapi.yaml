@@ -753,4 +753,3 @@ components:
         - last_login_timestamp
         - average_item_level
         - equipped_item_level
-        - active_title
