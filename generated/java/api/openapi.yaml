@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  description: An OpenAPI specification for Blizzard API
+  description: OpenAPI specification for Blizzard API
   title: Blizzard API
-  version: 0.4.0
+  version: 0.4.1
 servers:
 - url: "https://{region}.api.blizzard.com"
   variables:
@@ -2200,7 +2200,6 @@ components:
             de_DE: de_DE
           id: 0
         last_login_timestamp: 2
-        name_search: name_search
         gender:
           name:
             it_IT: it_IT
@@ -2379,8 +2378,6 @@ components:
           type: integer
         active_title:
           $ref: '#/components/schemas/ActiveTitleDTO'
-        name_search:
-          type: string
       required:
       - achievement_points
       - active_spec
@@ -2396,7 +2393,6 @@ components:
       - last_login_timestamp
       - level
       - name
-      - name_search
       - race
       - realm
       type: object
