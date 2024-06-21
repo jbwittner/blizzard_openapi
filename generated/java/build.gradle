@@ -4,7 +4,7 @@ apply plugin: 'java'
 apply plugin: 'com.diffplug.spotless'
 
 group = 'com.blizzardapi'
-version = '0.4.3'
+version = '0.4.4'
 
 buildscript {
     repositories {
