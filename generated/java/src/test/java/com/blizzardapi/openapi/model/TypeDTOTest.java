@@ -1,6 +1,6 @@
 /*
  * Blizzard API
- * An OpenAPI specification for Blizzard API
+ * OpenAPI specification for Blizzard API
  *
  * The version of the OpenAPI document: 0.4.1
  * 

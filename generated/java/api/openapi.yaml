@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  description: An OpenAPI specification for Blizzard API
+  description: OpenAPI specification for Blizzard API
   title: Blizzard API
   version: 0.4.1
 servers:
